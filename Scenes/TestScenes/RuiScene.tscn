@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1f3mx20k5s06"]
+
+[ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_xpux1"]
+
+[node name="RuiScene" type="Node2D"]
+
+[node name="SceneBaseResources" parent="." instance=ExtResource("1_xpux1")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

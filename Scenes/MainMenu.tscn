@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://1tt6ywmkt6xs"]
+
+[ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="1_ihgnj"]
+[ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_j7lwx"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ihgnj")
+
+[node name="SceneBaseResources" parent="." instance=ExtResource("1_j7lwx")]
