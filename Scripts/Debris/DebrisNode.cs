@@ -43,6 +43,10 @@ public partial class DebrisNode : Node2D {
 			currentScale = Mathf.Lerp(oldScale, targetScale, scaleTime);
 			Scale = new Vector2(currentScale, currentScale);
 		}
+
+		if (Data.PassiveParticleColours != null) {
+			CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 10, Data.PassiveParticleColours);
+		}
 	}
 
 	public void SetDebrisType(DebrisData data) {

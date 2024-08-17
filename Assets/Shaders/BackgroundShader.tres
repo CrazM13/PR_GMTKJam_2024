@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://dc11odjiy0uga"]
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://dc11odjiy0uga"]
 
 [ext_resource type="Texture2D" uid="uid://yqsm1ir5jns7" path="res://Assets/Textures/Sprites/Clouds.png" id="1_rfgqd"]
 
@@ -6,6 +6,16 @@
 parameter_name = "CloudSpeed"
 default_value_enabled = true
 default_value = 0.1
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_cc3fv"]
+parameter_name = "GalaxyTexture"
+texture_repeat = 1
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_reun6"]
+operator = 5
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ewjyn"]
+source = 5
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_rweb1"]
 source = 2
@@ -41,6 +51,7 @@ render_mode blend_mix;
 
 uniform float CloudSpeed = 0.10000000149012;
 uniform sampler2D CloudsTexture : repeat_enable;
+uniform sampler2D GalaxyTexture : repeat_enable;
 
 
 
@@ -79,32 +90,47 @@ void fragment() {
 	vec3 n_out3p0 = vec3(n_out2p0.xyz) * vec3(n_out4p0.xyz);
 
 
+	vec4 n_out13p0;
+// Texture2D:13
+	n_out13p0 = texture(GalaxyTexture, n_out5p0);
+
+
+// ColorOp:12
+	vec3 n_out12p0 = (n_out3p0) / (vec3(1.0) - vec3(n_out13p0.xyz));
+
+
 // Output:0
-	COLOR.rgb = n_out3p0;
+	COLOR.rgb = n_out12p0;
 
 
 }
 "
-graph_offset = Vector2(-922.526, 175.527)
+graph_offset = Vector2(321.085, 335.122)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(620, 100)
+nodes/fragment/0/position = Vector2(1220, 360)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_rweb1")
 nodes/fragment/2/position = Vector2(60, 0)
 nodes/fragment/3/node = SubResource("VisualShaderNodeVectorOp_ahak0")
 nodes/fragment/3/position = Vector2(340, 140)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_tpotw")
-nodes/fragment/4/position = Vector2(60, 220)
+nodes/fragment/4/position = Vector2(120, 320)
 nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_5abom")
-nodes/fragment/5/position = Vector2(-200, 240)
+nodes/fragment/5/position = Vector2(-100, 280)
 nodes/fragment/6/node = SubResource("VisualShaderNodeInput_ueeba")
-nodes/fragment/6/position = Vector2(-600, 240)
+nodes/fragment/6/position = Vector2(-600, 220)
 nodes/fragment/7/node = SubResource("VisualShaderNodeInput_fx7jl")
-nodes/fragment/7/position = Vector2(-740, 480)
+nodes/fragment/7/position = Vector2(-820, 620)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_irfa7")
-nodes/fragment/8/position = Vector2(-500, 540)
+nodes/fragment/8/position = Vector2(-480, 660)
 nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_y5d3o")
-nodes/fragment/9/position = Vector2(-420, 360)
+nodes/fragment/9/position = Vector2(-340, 460)
 nodes/fragment/10/node = SubResource("VisualShaderNodeFloatParameter_f0bsd")
-nodes/fragment/10/position = Vector2(-740, 280)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 4, 0, 3, 1, 5, 0, 4, 0, 6, 0, 5, 0, 8, 0, 4, 2, 3, 0, 0, 0, 7, 0, 9, 1, 10, 0, 9, 0, 9, 0, 5, 1)
+nodes/fragment/10/position = Vector2(-760, 360)
+nodes/fragment/11/node = SubResource("VisualShaderNodeTexture2DParameter_cc3fv")
+nodes/fragment/11/position = Vector2(0, 800)
+nodes/fragment/12/node = SubResource("VisualShaderNodeColorOp_reun6")
+nodes/fragment/12/position = Vector2(660, 460)
+nodes/fragment/13/node = SubResource("VisualShaderNodeTexture_ewjyn")
+nodes/fragment/13/position = Vector2(400, 680)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 4, 0, 3, 1, 5, 0, 4, 0, 6, 0, 5, 0, 8, 0, 4, 2, 7, 0, 9, 1, 10, 0, 9, 0, 9, 0, 5, 1, 3, 0, 12, 0, 11, 0, 13, 2, 13, 0, 12, 1, 12, 0, 0, 0, 5, 0, 13, 0)

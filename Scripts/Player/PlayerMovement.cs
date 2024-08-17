@@ -86,8 +86,14 @@ public partial class PlayerMovement : Node2D {
 				CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, CurrentForm.ParticleColours, collider);
 				DebrisManager.Instance.ClearActiveDebris();
 
+				GameManager.GameScale = DebrisManager.Instance.GetDebrisType(playerForms[0]).Mass;
+
 				GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
 			}
+		}
+
+		if (CurrentForm.PassiveParticleColours != null) {
+			CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 10, CurrentForm.PassiveParticleColours);
 		}
 	}
 

@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://br8tfu03tlr64"]
+[gd_scene load_steps=8 format=3 uid="uid://br8tfu03tlr64"]
 
 [ext_resource type="PackedScene" uid="uid://blgwkg7qnis78" path="res://Assets/Prefabs/SceneTransition.tscn" id="1_ku0yn"]
 [ext_resource type="Script" path="res://Scripts/Particles/CustomParticles.cs" id="2_dvo4c"]
 [ext_resource type="Shader" uid="uid://dc11odjiy0uga" path="res://Assets/Shaders/BackgroundShader.tres" id="3_y22yh"]
 [ext_resource type="Texture2D" uid="uid://yqsm1ir5jns7" path="res://Assets/Textures/Sprites/Clouds.png" id="4_cwibp"]
+[ext_resource type="Texture2D" uid="uid://buoun6nt5xs63" path="res://Assets/Textures/Sprites/Galaxy.png" id="5_cnofp"]
 [ext_resource type="Texture2D" uid="uid://dt6y2w30guhcx" path="res://Assets/Textures/Sprites/Starfield.png" id="5_jkjje"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i36xv"]
 shader = ExtResource("3_y22yh")
 shader_parameter/CloudSpeed = 0.1
 shader_parameter/CloudsTexture = ExtResource("4_cwibp")
+shader_parameter/GalaxyTexture = ExtResource("5_cnofp")
 
 [node name="SceneBaseResources" type="Node2D"]
 

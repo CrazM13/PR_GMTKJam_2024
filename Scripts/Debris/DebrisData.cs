@@ -9,6 +9,8 @@ public class DebrisData {
 	public Color[] ParticleColours { get; set; }
 	public float Mass { get; set; }
 
+	public Color[] PassiveParticleColours { get; set; }
+
 	public DebrisData(string name, string texturePath, float mass, params Color[] colours) {
 		
 		Name = name;
@@ -16,6 +18,12 @@ public class DebrisData {
 		Mass = mass;
 		ParticleColours = colours;
 
+	}
+
+	public DebrisData AddPassiveParticles(params Color[] colors) {
+		this.PassiveParticleColours = colors;
+
+		return this;
 	}
 
 }
