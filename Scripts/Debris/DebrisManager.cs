@@ -112,7 +112,7 @@ public class DebrisManager {
 		}
 	}
 
-	public float AttemptConsume(Node2D consumer, float maxDistance) {
+	public float AttemptConsume(PlayerMovement consumer, float maxDistance) {
 		float consumedMass = 0;
 
 		List<uint> toRemove = new List<uint>();
@@ -126,6 +126,8 @@ public class DebrisManager {
 
 		foreach (uint key in toRemove) {
 			CustomParticles.Instance.SpawnParticles(activeDebris[key].GlobalPosition, Mathf.CeilToInt(100 * activeDebris[key].TargetScale), 100, activeDebris[key].Data.ParticleColours, consumer);
+
+			consumer.PlayBreakingSFX();
 
 			activeDebris[key].QueueFree();
 			activeDebris.Remove(key);

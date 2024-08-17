@@ -6,6 +6,7 @@ public partial class PlayerMovement : Node2D {
 	[Export] private float consumptionEffeciency;
 	[Export] private Sprite2D sprite;
 	[Export] private ScaleCamera camera;
+	[Export] private AudioStreamPlayer2D audio;
 
 	public float Range { get; set; } = 10;
 
@@ -81,6 +82,7 @@ public partial class PlayerMovement : Node2D {
 			Node2D collider = DebrisManager.Instance.CheckCollision(this, Range);
 			if (collider != null) {
 				ShakeCamera(100, 100);
+				PlayBreakingSFX();
 				acceptInputs = false;
 				Visible = false;
 				CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, CurrentForm.ParticleColours, collider);
@@ -99,5 +101,9 @@ public partial class PlayerMovement : Node2D {
 
 	public void ShakeCamera(float strength, float intencity) {
 		camera.Shake(strength, intencity);
+	}
+
+	public void PlayBreakingSFX() {
+		audio.Play();
 	}
 }
