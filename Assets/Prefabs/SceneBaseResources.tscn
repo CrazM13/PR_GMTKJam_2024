@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://br8tfu03tlr64"]
+[gd_scene load_steps=7 format=3 uid="uid://br8tfu03tlr64"]
 
 [ext_resource type="PackedScene" uid="uid://blgwkg7qnis78" path="res://Assets/Prefabs/SceneTransition.tscn" id="1_ku0yn"]
 [ext_resource type="Script" path="res://Scripts/Particles/CustomParticles.cs" id="2_dvo4c"]
+[ext_resource type="Shader" uid="uid://dc11odjiy0uga" path="res://Assets/Shaders/BackgroundShader.tres" id="3_y22yh"]
+[ext_resource type="Texture2D" uid="uid://yqsm1ir5jns7" path="res://Assets/Textures/Sprites/Clouds.png" id="4_cwibp"]
+[ext_resource type="Texture2D" uid="uid://dt6y2w30guhcx" path="res://Assets/Textures/Sprites/Starfield.png" id="5_jkjje"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i36xv"]
+shader = ExtResource("3_y22yh")
+shader_parameter/CloudSpeed = 0.1
+shader_parameter/CloudsTexture = ExtResource("4_cwibp")
 
 [node name="SceneBaseResources" type="Node2D"]
 
@@ -9,3 +17,21 @@
 
 [node name="ParticleManager" type="Node2D" parent="."]
 script = ExtResource("2_dvo4c")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_repeat = 3
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -100
+z_as_relative = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i36xv")
+position = Vector2(577, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("5_jkjje")
+region_enabled = true
+region_rect = Rect2(0, 0, 1000, 1000)

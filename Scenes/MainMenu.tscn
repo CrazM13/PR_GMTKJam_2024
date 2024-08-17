@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://1tt6ywmkt6xs"]
+[gd_scene load_steps=9 format=3 uid="uid://1tt6ywmkt6xs"]
 
 [ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="1_ihgnj"]
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_j7lwx"]
+[ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="3_8o5h3"]
+[ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="4_pymae"]
+[ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="5_wn4wx"]
+[ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
+[ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="7_7ere3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dgmmd"]
+font_size = 148
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,3 +23,80 @@ grow_vertical = 2
 theme = ExtResource("1_ihgnj")
 
 [node name="SceneBaseResources" parent="." instance=ExtResource("1_j7lwx")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("7_7ere3")
+speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ihgnj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Name"
+label_settings = SubResource("LabelSettings_dgmmd")
+
+[node name="Options" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Play"
+icon = ExtResource("3_8o5h3")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Options" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Options"
+icon = ExtResource("4_pymae")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Credits" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Credits"
+icon = ExtResource("5_wn4wx")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Quit"
+icon = ExtResource("6_ps1w5")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Options" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/OptionsMenu.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Quit" to="SceneBaseResources/SceneTransition" method="Quit"]
+
+[editable path="SceneBaseResources"]

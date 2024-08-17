@@ -1,3 +1,35 @@
-[gd_resource type="Theme" format=3 uid="uid://c4rluknvcil5d"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c4rluknvcil5d"]
+
+[ext_resource type="FontFile" uid="uid://cuhrcs35ldyej" path="res://Assets/Fonts/Silkscreen/slkscr.ttf" id="1_d1bva"]
+[ext_resource type="Texture2D" uid="uid://jtl5jnrd722s" path="res://Assets/Textures/UI/9SliceOutline.png" id="2_m7pxu"]
+[ext_resource type="FontFile" uid="uid://b4jcyukd6iqvh" path="res://Assets/Fonts/Silkscreen/slkscreb.ttf" id="3_rpn5f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0fxr"]
+texture = ExtResource("2_m7pxu")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nq70y"]
+texture = ExtResource("2_m7pxu")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 16
+Button/font_sizes/font_size = 48
+Button/fonts/font = ExtResource("1_d1bva")
+Button/styles/normal = SubResource("StyleBoxTexture_x0fxr")
+Fonts/fonts/large = ExtResource("3_rpn5f")
+Fonts/fonts/normal = ExtResource("1_d1bva")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 16
+Label/font_sizes/font_size = 48
+Label/fonts/font = ExtResource("1_d1bva")
+Panel/styles/panel = SubResource("StyleBoxTexture_nq70y")

@@ -1,9 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=8 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
+[ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.cs" id="3_tawnv"]
+[ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="4_lc7c3"]
+[ext_resource type="Script" path="res://Scripts/Debris/DebrisRotation.cs" id="5_h2ipd"]
+[ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="6_4acm6"]
+[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_fxyhk"]
 
 [node name="GameScene" type="Node2D"]
 
 [node name="SceneBaseResources" parent="." instance=ExtResource("1_c1l5s")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 326)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+script = ExtResource("2_8oanl")
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera")]
+position = Vector2(577, 326)
+script = ExtResource("3_tawnv")
+consumptionEffeciency = 0.25
+sprite = NodePath("Sprite2D")
+camera = NodePath("../Camera2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture_filter = 1
+texture = ExtResource("4_lc7c3")
+script = ExtResource("5_h2ipd")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="DebrisTimer" type="Timer" parent="." node_paths=PackedStringArray("camera")]
+wait_time = 0.25
+autostart = true
+script = ExtResource("6_4acm6")
+gridScale = 4.0
+camera = NodePath("../Player")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fxyhk")
+autoplay = true
+bus = &"Music"
+
+[connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]

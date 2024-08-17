@@ -1,0 +1,159 @@
+[gd_scene load_steps=10 format=3 uid="uid://uhfaocn1pxkb"]
+
+[ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_8s7y2"]
+[ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="2_ylo7d"]
+[ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="3_ua68n"]
+[ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="4_6bn1o"]
+[ext_resource type="Script" path="res://Scripts/UI/VolumeSlider.cs" id="4_w1apa"]
+[ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="5_31vkf"]
+[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_wrpeo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d57ki"]
+font_size = 148
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6e5li"]
+font_size = 32
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SceneBaseResources" parent="." instance=ExtResource("1_8s7y2")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_ylo7d")
+speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ua68n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+label_settings = SubResource("LabelSettings_d57ki")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel"]
+layout_mode = 2
+offset_top = 4.0
+offset_right = 688.0
+offset_bottom = 4.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(196, 0)
+layout_mode = 2
+text = "   Master"
+label_settings = SubResource("LabelSettings_6e5li")
+
+[node name="Master Volume" type="HSlider" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+script = ExtResource("4_w1apa")
+busName = "Master"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(196, 0)
+layout_mode = 2
+text = "     Music"
+label_settings = SubResource("LabelSettings_6e5li")
+
+[node name="Music Volume" type="HSlider" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+script = ExtResource("4_w1apa")
+busName = "Music"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(196, 0)
+layout_mode = 2
+text = "     SFX"
+label_settings = SubResource("LabelSettings_6e5li")
+
+[node name="SFX Volume" type="HSlider" parent="CanvasLayer/CenterContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+script = ExtResource("4_w1apa")
+busName = "SFX"
+
+[node name="Options" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Play"
+icon = ExtResource("4_6bn1o")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Back" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Back"
+icon = ExtResource("5_31vkf")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_wrpeo")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/MainMenu.tscn"]]
+
+[editable path="SceneBaseResources"]

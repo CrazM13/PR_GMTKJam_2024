@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="PR_GMTKJam_2024"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://Assets/Audio/AudioBus.tres"
 
 [dotnet]
 
