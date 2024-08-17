@@ -97,6 +97,7 @@ expand_icon = true
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Options" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/OptionsMenu.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Credits" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/CreditsMenu.tscn"]]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Quit" to="SceneBaseResources/SceneTransition" method="Quit"]
 
 [editable path="SceneBaseResources"]
