@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c77f408en8d8u"]
+[gd_scene load_steps=11 format=3 uid="uid://c77f408en8d8u"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_1634i"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.cs" id="2_us0qi"]
@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="4_8sk0m"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="4_vjrip"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisRotation.cs" id="5_akpdl"]
+[ext_resource type="Shader" uid="uid://dc11odjiy0uga" path="res://Assets/Shaders/BackgroundShader.tres" id="7_50bsl"]
+[ext_resource type="Texture2D" uid="uid://yqsm1ir5jns7" path="res://Assets/Textures/Sprites/Clouds.png" id="8_lr7o3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gnua"]
+shader = ExtResource("7_50bsl")
+shader_parameter/CloudSpeed = 0.1
+shader_parameter/CloudsTexture = ExtResource("8_lr7o3")
 
 [node name="JosephScene" type="Node2D"]
 
@@ -55,6 +62,7 @@ motion_mirroring = Vector2(2000, 2000)
 z_index = -100
 z_as_relative = false
 texture_repeat = 2
+material = SubResource("ShaderMaterial_2gnua")
 position = Vector2(577, 326)
 scale = Vector2(2, 2)
 texture = ExtResource("3_xvfat")
