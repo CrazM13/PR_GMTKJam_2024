@@ -1,21 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://c77f408en8d8u"]
+[gd_scene load_steps=9 format=3 uid="uid://c77f408en8d8u"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_1634i"]
 [ext_resource type="Texture2D" uid="uid://dlstbyk8j6e4" path="res://Assets/Textures/Sprites/16x16Placeholder.png" id="2_pxpws"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.cs" id="2_us0qi"]
+[ext_resource type="Shader" uid="uid://cbhv54b7ytsb8" path="res://Assets/Shaders/Background.tres" id="3_2pedx"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="4_1yr6e"]
+[ext_resource type="Texture2D" uid="uid://jg0gw8pnmot6" path="res://Assets/Textures/UI/64by649SlicePlaceholder.png" id="4_7t7se"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="4_vjrip"]
 
-[node name="JosephScene" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fay1h"]
+shader = ExtResource("3_2pedx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.501961, 0.113725, 0.337255, 1)
-texture_filter = 1
-texture_repeat = 2
-position = Vector2(571, 321)
-texture = ExtResource("2_pxpws")
-region_enabled = true
-region_rect = Rect2(0, 0, 1024, 1024)
+[node name="JosephScene" type="Node2D"]
 
 [node name="SceneBaseResources" parent="." instance=ExtResource("1_1634i")]
 
@@ -29,10 +25,19 @@ drag_vertical_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("4_1yr6e")
 
-[node name="CharacterBody2D" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+z_index = -100
+z_as_relative = false
+material = SubResource("ShaderMaterial_fay1h")
+texture = ExtResource("4_7t7se")
+region_enabled = true
+region_rect = Rect2(0, 0, 2056, 2056)
+
+[node name="CharacterBody2D" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera")]
 position = Vector2(577, 326)
 script = ExtResource("2_us0qi")
 consumptionEffeciency = 0.25
+sprite = NodePath("Sprite2D")
 camera = NodePath("../Camera2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -43,6 +48,7 @@ texture = ExtResource("2_pxpws")
 remote_path = NodePath("../../Camera2D")
 
 [node name="DebrisTimer" type="Timer" parent="." node_paths=PackedStringArray("camera")]
+wait_time = 0.25
 autostart = true
 script = ExtResource("4_vjrip")
 gridScale = 4.0

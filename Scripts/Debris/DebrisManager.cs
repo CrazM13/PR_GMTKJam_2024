@@ -33,7 +33,7 @@ public class DebrisManager {
 		AddDebrisType(new DebrisData("SPACE_DEBRIS", "res://Assets/Textures/Sprites/16x16Placeholder.png", 25600, Colors.Purple));
 		AddDebrisType(new DebrisData("METEOROID", "res://Assets/Textures/Sprites/16x16Placeholder.png", 102400, Colors.Purple));
 		AddDebrisType(new DebrisData("PLANETOID", "res://Assets/Textures/Sprites/16x16Placeholder.png", 409600, Colors.Purple));
-		AddDebrisType(new DebrisData("MOON", "res://Assets/Textures/Sprites/16x16Placeholder.png", 1638400, Colors.Purple));
+		AddDebrisType(new DebrisData("MOON", "res://Assets/Textures/Sprites/Moon_A.png", 1638400, new Color("#EFFFFB"), new Color("#C2CECB")));
 		AddDebrisType(new DebrisData("PLANET", "res://Assets/Textures/Sprites/16x16Placeholder.png", 6553600, Colors.Purple));
 		AddDebrisType(new DebrisData("GAS_GIANT", "res://Assets/Textures/Sprites/16x16Placeholder.png", 26214400, Colors.Purple));
 		AddDebrisType(new DebrisData("RED_DWARF", "res://Assets/Textures/Sprites/16x16Placeholder.png", 104857600, Colors.Purple));
@@ -76,7 +76,7 @@ public class DebrisManager {
 
 		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
 
-			if (debris.Value.TargetScale <= 0.25f || debris.Value.GlobalPosition.DistanceSquaredTo(center) > maxDistance * maxDistance) {
+			if (debris.Value.TargetScale <= 0.25f || debris.Value.TargetScale >= 25f || debris.Value.GlobalPosition.DistanceSquaredTo(center) > maxDistance * maxDistance) {
 				toRemove.Add(debris.Key);
 			}
 		}
@@ -134,16 +134,36 @@ public class DebrisManager {
 		return consumedMass;
 	}
 
-	public void DisplayNearbyEffect(Node2D consumer, float maxDistance, float chance) {
+	public Node2D CheckCollision(PlayerMovement consumer, float maxDistance) {
+
 		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
-			if (GD.Randf() > 1 - chance && debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance) {
+			if (debris.Value.Data.Mass > GameManager.GameScale && debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < Mathf.Min(maxDistance * debris.Value.TargetScale, 500)) {
+				return debris.Value;
+			}
+		}
+
+		return null;
+	}
+
+	public void DisplayNearbyEffect(PlayerMovement consumer, float maxDistance, float chance) {
+		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
+			if (GD.Randf() > 1 - chance) {
 				if (debris.Value.Data.Mass <= GameManager.GameScale) {
-					CustomParticles.Instance.SpawnParticles(debris.Value.GlobalPosition, 1, 10, debris.Value.Data.ParticleColours, consumer);
+					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance) {
+						CustomParticles.Instance.SpawnParticles(debris.Value.GlobalPosition, 1, 10, debris.Value.Data.ParticleColours, consumer);
+					}
 				} else {
-					CustomParticles.Instance.SpawnParticles(consumer.GlobalPosition, 1, 10, debris.Value.Data.ParticleColours, debris.Value);
+					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < Mathf.Min(maxDistance * debris.Value.TargetScale, 500)) {
+						CustomParticles.Instance.SpawnParticles(consumer.GlobalPosition, 1, 10, consumer.CurrentForm.ParticleColours, debris.Value);
+						consumer.ShakeCamera(5f, 100f);
+					}
 				}
 			}
 		}
+	}
+
+	public void ClearActiveDebris() {
+		activeDebris.Clear();
 	}
 
 }

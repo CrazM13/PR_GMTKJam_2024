@@ -15,7 +15,7 @@ public partial class ScaleCamera : Camera2D {
 	#endregion
 
 	public void Shake(float strength, float intensity = 1) {
-		shakeStrength = MathF.Max(shakeStrength, strength);
+		shakeStrength = Mathf.Max(shakeStrength, strength);
 		intensityMod = intensity;
 	}
 

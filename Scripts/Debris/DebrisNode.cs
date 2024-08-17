@@ -37,10 +37,12 @@ public partial class DebrisNode : Node2D {
 
 		this.Position += Velocity * (float) delta;
 
-		float currentScale = Scale.X;
-		scaleTime += (float) delta;
-		currentScale = Mathf.Lerp(oldScale, targetScale, scaleTime);
-		Scale = new Vector2 (currentScale, currentScale);
+		if (scaleTime < 1) {
+			float currentScale = Scale.X;
+			scaleTime += (float) delta;
+			currentScale = Mathf.Lerp(oldScale, targetScale, scaleTime);
+			Scale = new Vector2(currentScale, currentScale);
+		}
 	}
 
 	public void SetDebrisType(DebrisData data) {
