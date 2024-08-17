@@ -27,12 +27,12 @@ public class DebrisManager {
 
 	private void InitDebrisTypes() {
 		AddDebrisType(new DebrisData("ALPHA_PARTICLE", "res://Assets/Textures/Sprites/Alpha Particle.png", 100, new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
-		AddDebrisType(new DebrisData("GRAIN_OF_SAND", "res://Assets/Textures/Sprites/16x16Placeholder.png", 400, Colors.Purple));
-		AddDebrisType(new DebrisData("STONE", "res://Assets/Textures/Sprites/16x16Placeholder.png", 1600, Colors.Purple));
-		AddDebrisType(new DebrisData("BOULDER", "res://Assets/Textures/Sprites/16x16Placeholder.png", 6400, Colors.Purple));
-		AddDebrisType(new DebrisData("SPACE_DEBRIS", "res://Assets/Textures/Sprites/16x16Placeholder.png", 25600, Colors.Purple));
-		AddDebrisType(new DebrisData("METEOROID", "res://Assets/Textures/Sprites/16x16Placeholder.png", 102400, Colors.Purple));
-		AddDebrisType(new DebrisData("PLANETOID", "res://Assets/Textures/Sprites/16x16Placeholder.png", 409600, Colors.Purple));
+		AddDebrisType(new DebrisData("GRAIN_OF_SAND", "res://Assets/Textures/Sprites/Grain of Sand.png", 400, new Color("#FDEE9D")));
+		AddDebrisType(new DebrisData("STONE", "res://Assets/Textures/Sprites/Stone.png", 1600, new Color("#55B131"), new Color("#C3E3B6")));
+		AddDebrisType(new DebrisData("BOULDER", "res://Assets/Textures/Sprites/Boulder.png", 6400, new Color("#71736A"), new Color("#6D6A5B")));
+		AddDebrisType(new DebrisData("SPACE_DEBRIS", "res://Assets/Textures/Sprites/Space Debris.png", 25600, new Color("#88C66F"), new Color("#6D6658"), new Color("#FEED98")));
+		AddDebrisType(new DebrisData("METEOROID", "res://Assets/Textures/Sprites/Meteoroid.png", 102400, new Color("#71736A"), new Color("#6D6A5B")));
+		AddDebrisType(new DebrisData("PLANETOID", "res://Assets/Textures/Sprites/Planetoid.png", 409600, new Color("#71736A"), new Color("#6D6A5B")));
 		AddDebrisType(new DebrisData("MOON", "res://Assets/Textures/Sprites/Moon_A.png", 1638400, new Color("#EFFFFB"), new Color("#C2CECB")));
 		AddDebrisType(new DebrisData("PLANET", "res://Assets/Textures/Sprites/Planet_A.png", 6553600, new Color("#D37474"), new Color("#CE5454"), new Color("#774141")));
 		AddDebrisType(new DebrisData("GAS_GIANT", "res://Assets/Textures/Sprites/Gas_Giant_A.png", 26214400, new Color("#93B2FF"), new Color("#446FE5"), new Color("#3B60C6")));
