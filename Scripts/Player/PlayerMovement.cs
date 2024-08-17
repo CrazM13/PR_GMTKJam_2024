@@ -46,7 +46,7 @@ public partial class PlayerMovement : Node2D {
 		if (acceptInputs) {
 			// Get the input direction and handle the movement/deceleration.
 			// As good practice, you should replace UI actions with custom gameplay actions.
-			Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+			Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 			if (direction != Vector2.Zero) {
 
 				float newX = direction.X * Speed;
