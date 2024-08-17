@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqhq64rxjqg5c"]
+[gd_scene load_steps=4 format=3 uid="uid://bqhq64rxjqg5c"]
 
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisNode.cs" id="1_l86wg"]
 [ext_resource type="Texture2D" uid="uid://dlstbyk8j6e4" path="res://Assets/Textures/Sprites/16x16Placeholder.png" id="2_jiao5"]
+[ext_resource type="Script" path="res://Scripts/Debris/DebrisRotation.cs" id="3_y26h7"]
 
 [node name="BaseDebris" type="Node2D" node_paths=PackedStringArray("sprite")]
 position = Vector2(205, 137)
@@ -13,3 +14,4 @@ speed = 10.0
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("2_jiao5")
+script = ExtResource("3_y26h7")

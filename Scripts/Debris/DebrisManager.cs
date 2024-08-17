@@ -26,7 +26,7 @@ public class DebrisManager {
 	}
 
 	private void InitDebrisTypes() {
-		AddDebrisType(new DebrisData("ALPHA_PARTICLE", "res://Assets/Textures/Sprites/16x16Placeholder.png", 100, Colors.Purple));
+		AddDebrisType(new DebrisData("ALPHA_PARTICLE", "res://Assets/Textures/Sprites/Alpha Particle.png", 100, new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
 		AddDebrisType(new DebrisData("GRAIN_OF_SAND", "res://Assets/Textures/Sprites/16x16Placeholder.png", 400, Colors.Purple));
 		AddDebrisType(new DebrisData("STONE", "res://Assets/Textures/Sprites/16x16Placeholder.png", 1600, Colors.Purple));
 		AddDebrisType(new DebrisData("BOULDER", "res://Assets/Textures/Sprites/16x16Placeholder.png", 6400, Colors.Purple));
@@ -125,7 +125,7 @@ public class DebrisManager {
 		}
 
 		foreach (uint key in toRemove) {
-			CustomParticles.Instance.SpawnParticles(activeDebris[key].GlobalPosition, 100, 100, activeDebris[key].Data.ParticleColours, consumer);
+			CustomParticles.Instance.SpawnParticles(activeDebris[key].GlobalPosition, Mathf.CeilToInt(100 * activeDebris[key].TargetScale), 100, activeDebris[key].Data.ParticleColours, consumer);
 
 			activeDebris[key].QueueFree();
 			activeDebris.Remove(key);

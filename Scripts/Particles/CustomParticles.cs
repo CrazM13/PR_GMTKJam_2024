@@ -31,6 +31,8 @@ public partial class CustomParticles : Node2D {
 	private RandomNumberGenerator rng;
 
 	public void SpawnParticles(Vector2 position, int count, float speed, Color[] colors, Node2D attractor = null) {
+		int cOffset = rng.RandiRange(0, colors.Length);
+
 		for (int i = 0; i < count; i++) {
 			float offsetX = rng.Randf();
 			float offsetY = rng.Randf();
@@ -40,7 +42,7 @@ public partial class CustomParticles : Node2D {
 				Position = position + new Vector2(offsetX, offsetY),
 				Velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed,
 				Age = 0,
-				Colour = colors[i % colors.Length],
+				Colour = colors[(cOffset + i) % colors.Length],
 				Attractor = attractor
 			};
 

@@ -33,7 +33,7 @@ public partial class PlayerMovement : Node2D {
 	private int currentFormIndex = 0;
 
 	public DebrisData CurrentForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex]);
-	public DebrisData NextForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex++]);
+	public DebrisData NextForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex + 1]);
 
 	public override void _Ready() {
 		base._Ready();
