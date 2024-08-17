@@ -1,15 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c77f408en8d8u"]
+[gd_scene load_steps=7 format=3 uid="uid://c77f408en8d8u"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_1634i"]
 [ext_resource type="Texture2D" uid="uid://dlstbyk8j6e4" path="res://Assets/Textures/Sprites/16x16Placeholder.png" id="2_pxpws"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.cs" id="2_us0qi"]
-[ext_resource type="Shader" uid="uid://cbhv54b7ytsb8" path="res://Assets/Shaders/Background.tres" id="3_2pedx"]
+[ext_resource type="Texture2D" uid="uid://dt6y2w30guhcx" path="res://Assets/Textures/Sprites/Starfield.png" id="3_xvfat"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="4_1yr6e"]
-[ext_resource type="Texture2D" uid="uid://jg0gw8pnmot6" path="res://Assets/Textures/UI/64by649SlicePlaceholder.png" id="4_7t7se"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="4_vjrip"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fay1h"]
-shader = ExtResource("3_2pedx")
 
 [node name="JosephScene" type="Node2D"]
 
@@ -24,14 +20,6 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("4_1yr6e")
-
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
-z_index = -100
-z_as_relative = false
-material = SubResource("ShaderMaterial_fay1h")
-texture = ExtResource("4_7t7se")
-region_enabled = true
-region_rect = Rect2(0, 0, 2056, 2056)
 
 [node name="CharacterBody2D" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera")]
 position = Vector2(577, 326)
@@ -53,6 +41,23 @@ autostart = true
 script = ExtResource("4_vjrip")
 gridScale = 4.0
 camera = NodePath("../CharacterBody2D")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_repeat = 3
+motion_mirroring = Vector2(2056, 2056)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -100
+z_as_relative = false
+texture_repeat = 3
+position = Vector2(577, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("3_xvfat")
+region_enabled = true
+region_rect = Rect2(0, 0, 2056, 2056)
 
 [connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]
 
