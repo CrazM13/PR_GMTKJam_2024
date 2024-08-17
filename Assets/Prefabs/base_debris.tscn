@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqhq64rxjqg5c"]
+
+[ext_resource type="Script" path="res://Scripts/Debris/DebrisNode.cs" id="1_l86wg"]
+[ext_resource type="Texture2D" uid="uid://dlstbyk8j6e4" path="res://Assets/Textures/Sprites/16x16Placeholder.png" id="2_jiao5"]
+
+[node name="BaseDebris" type="Node2D" node_paths=PackedStringArray("sprite")]
+position = Vector2(205, 137)
+script = ExtResource("1_l86wg")
+sprite = NodePath("Sprite2D")
+speed = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_jiao5")
