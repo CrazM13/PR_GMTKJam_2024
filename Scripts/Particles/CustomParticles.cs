@@ -20,6 +20,7 @@ public partial class CustomParticles : Node2D {
 	private class Particle {
 		public Vector2 Position { get; set; }
 		public Vector2 Velocity { get; set; }
+		public float Scale { get; set; }
 
 		public float Age { get; set; }
 		public Color Colour { get; set; }
@@ -30,7 +31,7 @@ public partial class CustomParticles : Node2D {
 	private List<Particle> particles;
 	private RandomNumberGenerator rng;
 
-	public void SpawnParticles(Vector2 position, int count, float speed, Color[] colors, Node2D attractor = null) {
+	public void SpawnParticles(Vector2 position, int count, float speed, float scale, Color[] colors, Node2D attractor = null) {
 		int cOffset = rng.RandiRange(0, colors.Length);
 
 		for (int i = 0; i < count; i++) {
@@ -41,6 +42,7 @@ public partial class CustomParticles : Node2D {
 			Particle particle = new Particle {
 				Position = position + new Vector2(offsetX, offsetY),
 				Velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed,
+				Scale = scale,
 				Age = 0,
 				Colour = colors[(cOffset + i) % colors.Length],
 				Attractor = attractor
@@ -64,9 +66,14 @@ public partial class CustomParticles : Node2D {
 
 				particle.Velocity += direction.Normalized() * 100 * (float) delta * (rng.Randf() + 0.5f);
 
-				if (particle.Age > 10f) {
+				if (particle.Age > 3f) {
 					particle.Velocity *= 0.99f;
 					particle.Velocity += direction * (float) delta;
+				}
+
+				if (particle.Age > 6f) {
+					particle.Velocity *= 0.99f;
+					particle.Velocity += direction * (float) delta * 4;
 				}
 
 				if (particle.Age > 1f && particle.Position.DistanceSquaredTo(particle.Attractor.GlobalPosition) < 100f * particle.Attractor.GlobalScale.X) {
@@ -77,7 +84,7 @@ public partial class CustomParticles : Node2D {
 			particle.Position += particle.Velocity * (float) delta;
 			particle.Age += (float) delta;
 
-			if (particle.Age > 30f) {
+			if (particle.Age > 10f) {
 				particles.RemoveAt(i);
 			}
 		}
@@ -93,7 +100,7 @@ public partial class CustomParticles : Node2D {
 	}
 
 	private void DrawParticle(Particle particle) {
-		DrawRect(new Rect2(particle.Position, Vector2.One * 4), particle.Colour);
+		DrawRect(new Rect2(particle.Position, Vector2.One * 4 * particle.Scale), particle.Colour.Lerp(new Color(particle.Colour.R, particle.Colour.G, particle.Colour.B, 0), Mathf.Max(0, (particle.Age - 9) / 1)));
 	}
 
 }

@@ -38,7 +38,6 @@ public partial class DebrisSpawner : Timer {
 
 	private void UpdateDebris() {
 		if (DebrisManager.Instance.GetActiveDebrisCount() < maxDebris) AttemptSpawn();
-		DebrisManager.Instance.ScaleDebris();
 		DebrisManager.Instance.CullDebris(camera.GlobalPosition, 1500);
 	}
 

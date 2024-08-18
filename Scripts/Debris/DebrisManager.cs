@@ -40,7 +40,7 @@ public class DebrisManager {
 		AddDebrisType(new DebrisData("G_TYPE", "res://Assets/Textures/Sprites/G_Type_A.png", 419430400, new Color("#FDFF93"), new Color("#FFE07C"), new Color("#FFD54C")).AddPassiveParticles(new Color("#FDFF93"), new Color("#FFE07C"), new Color("#FFD54C")));
 		AddDebrisType(new DebrisData("RED_GIANT", "res://Assets/Textures/Sprites/Red_Giant_A.png", 1677721600, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
 		AddDebrisType(new DebrisData("RED_SUPERGIANT", "res://Assets/Textures/Sprites/Red_Supergiant_A.png", 6710886400, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
-		AddDebrisType(new DebrisData("BLACK_HOLE", "res://Assets/Textures/Sprites/16x16Placeholder.png", 26843545600, new Color("#EFFFFB")).AddPassiveParticles(new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
+		AddDebrisType(new DebrisData("BLACK_HOLE", "res://Assets/Textures/Sprites/Black_Hole_A.png", 26843545600, new Color("#EFFFFB")).AddPassiveParticles(new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
 	}
 
 	private Dictionary<string, DebrisData> debrisTypes;
@@ -98,6 +98,7 @@ public class DebrisManager {
 
 		node.DebrisID = GetNewDebrisID();
 		node.SetDebrisType(type);
+		node.TargetScale = node.Data.Mass / GameManager.GameScale;
 
 		activeDebris.Add(node.DebrisID, node);
 
@@ -118,14 +119,14 @@ public class DebrisManager {
 		List<uint> toRemove = new List<uint>();
 
 		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
-			if (debris.Value.Data.Mass <= GameManager.GameScale && debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance) {
+			if (debris.Value.Data.Mass <= GameManager.CurrentMass && debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance) {
 				toRemove.Add(debris.Key);
 				consumedMass += debris.Value.Data.Mass;
 			}
 		}
 
 		foreach (uint key in toRemove) {
-			CustomParticles.Instance.SpawnParticles(activeDebris[key].GlobalPosition, Mathf.CeilToInt(100 * activeDebris[key].TargetScale), 100, activeDebris[key].Data.ParticleColours, consumer);
+			CustomParticles.Instance.SpawnParticles(activeDebris[key].GlobalPosition, Mathf.CeilToInt(50 * activeDebris[key].TargetScale), 100, 1, activeDebris[key].Data.ParticleColours, consumer);
 
 			consumer.PlayBreakingSFX();
 
@@ -139,7 +140,7 @@ public class DebrisManager {
 	public Node2D CheckCollision(PlayerMovement consumer, float maxDistance) {
 
 		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
-			if (debris.Value.Data.Mass > GameManager.GameScale && debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < Mathf.Min(maxDistance * debris.Value.TargetScale, 500)) {
+			if (debris.Value.Data.Mass > GameManager.CurrentMass && debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < Mathf.Min(maxDistance * debris.Value.TargetScale, 500)) {
 				return debris.Value;
 			}
 		}
@@ -150,13 +151,13 @@ public class DebrisManager {
 	public void DisplayNearbyEffect(PlayerMovement consumer, float maxDistance, float chance) {
 		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
 			if (GD.Randf() > 1 - chance) {
-				if (debris.Value.Data.Mass <= GameManager.GameScale) {
+				if (debris.Value.Data.Mass <= GameManager.CurrentMass) {
 					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance) {
-						CustomParticles.Instance.SpawnParticles(debris.Value.GlobalPosition, 1, 10, debris.Value.Data.ParticleColours, consumer);
+						CustomParticles.Instance.SpawnParticles(debris.Value.GlobalPosition, 1, 10, 1, debris.Value.Data.ParticleColours, consumer);
 					}
 				} else {
 					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < Mathf.Min(maxDistance * debris.Value.TargetScale, 500)) {
-						CustomParticles.Instance.SpawnParticles(consumer.GlobalPosition, 1, 10, consumer.CurrentForm.ParticleColours, debris.Value);
+						CustomParticles.Instance.SpawnParticles(consumer.GlobalPosition, 1, 10, 1, consumer.CurrentForm.ParticleColours, debris.Value);
 						consumer.ShakeCamera(5f, 100f);
 					}
 				}

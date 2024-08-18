@@ -8,7 +8,19 @@ public partial class PlayerMovement : Node2D {
 	[Export] private ScaleCamera camera;
 	[Export] private AudioStreamPlayer2D audio;
 
-	public float Range { get; set; } = 10;
+	public float Range { get; set; } = 16;
+	public float TargetScale {
+		get => targetScale;
+		set {
+			oldScale = Scale.X;
+			targetScale = value;
+			scaleTime = 0;
+		}
+	}
+
+	private float targetScale = 1;
+	private float oldScale = 0;
+	private float scaleTime = 0;
 
 	private Vector2 velocity;
 
@@ -36,11 +48,49 @@ public partial class PlayerMovement : Node2D {
 	public DebrisData CurrentForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex]);
 	public DebrisData NextForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex + 1]);
 
+	private int emmisionFrames = 0;
+
 	public override void _Ready() {
 		base._Ready();
 
+		Scale = new Vector2(0, 0);
 		DebrisManager.Instance.ClearActiveDebris();
 	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		if (scaleTime < 1) {
+			float currentScale = Scale.X;
+			scaleTime += (float) delta;
+			currentScale = Mathf.Lerp(oldScale, targetScale, scaleTime);
+			Scale = new Vector2(currentScale, currentScale);
+			oldScale = Scale.X;
+		}
+
+		emmisionFrames++;
+		if (emmisionFrames == 10) {
+			DebrisData currentFormData = CurrentForm;
+			if (currentFormData.PassiveParticleColours != null) {
+				CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 10, 1, currentFormData.PassiveParticleColours);
+			}
+
+			emmisionFrames = 0;
+		}
+
+		bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Equal);
+		if (isCheatKeyNowPressed && !isCheatkeyPressed) {
+			GameManager.CurrentMass += CurrentForm.Mass * consumptionEffeciency;
+
+			if (GameManager.CurrentMass >= NextForm.Mass) {
+				LevelUp();
+			} else {
+				TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+			}
+		}
+		isCheatkeyPressed = isCheatKeyNowPressed;
+	}
+	private bool isCheatkeyPressed = false;
 
 	public override void _PhysicsProcess(double delta) {
 
@@ -67,15 +117,12 @@ public partial class PlayerMovement : Node2D {
 			float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range) * consumptionEffeciency;
 			if (consumedMass > 0) {
 				ShakeCamera(100, 100);
-				GameManager.GameScale += consumedMass;
+				GameManager.CurrentMass += consumedMass;
 
-				if (GameManager.GameScale >= NextForm.Mass) {
-					DebrisData currentFormData = CurrentForm;
-
-					Color[] colours = currentFormData.ParticleColours;
-					CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, colours, this);
-					currentFormIndex++;
-					sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
+				if (GameManager.CurrentMass >= NextForm.Mass) {
+					LevelUp();
+				} else {
+					TargetScale = GameManager.CurrentMass / GameManager.GameScale;
 				}
 			}
 
@@ -85,17 +132,13 @@ public partial class PlayerMovement : Node2D {
 				PlayBreakingSFX();
 				acceptInputs = false;
 				Visible = false;
-				CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, CurrentForm.ParticleColours, collider);
+				CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, 1, CurrentForm.ParticleColours, collider);
 				DebrisManager.Instance.ClearActiveDebris();
 
-				GameManager.GameScale = DebrisManager.Instance.GetDebrisType(playerForms[0]).Mass;
+				GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0]).Mass;
 
 				GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
 			}
-		}
-
-		if (CurrentForm.PassiveParticleColours != null) {
-			CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 10, CurrentForm.PassiveParticleColours);
 		}
 	}
 
@@ -105,5 +148,17 @@ public partial class PlayerMovement : Node2D {
 
 	public void PlayBreakingSFX() {
 		audio.Play();
+	}
+
+	private void LevelUp() {
+		TargetScale = 1;
+		GameManager.GameScale = NextForm.Mass;
+		DebrisManager.Instance.ScaleDebris();
+		DebrisData currentFormData = CurrentForm;
+
+		Color[] colours = currentFormData.ParticleColours;
+		CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 100, 1, colours, this);
+		currentFormIndex++;
+		sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
 	}
 }

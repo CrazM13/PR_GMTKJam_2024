@@ -24,6 +24,8 @@ public partial class DebrisNode : Node2D {
 	private float oldScale = 0;
 	private float scaleTime = 0;
 
+	private int emmisionFrames = 0;
+
 	public override void _Ready() {
 		base._Ready();
 
@@ -44,8 +46,13 @@ public partial class DebrisNode : Node2D {
 			Scale = new Vector2(currentScale, currentScale);
 		}
 
-		if (Data.PassiveParticleColours != null) {
-			CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 10, Data.PassiveParticleColours);
+		emmisionFrames++;
+		if (emmisionFrames == 32) {
+			if (Data.PassiveParticleColours != null) {
+				CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 100 + (50 * TargetScale * 0.5f), Mathf.Max(1, TargetScale * 0.5f), Data.PassiveParticleColours, this);
+			}
+
+			emmisionFrames = 0;
 		}
 	}
 
