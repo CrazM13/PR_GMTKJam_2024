@@ -27,27 +27,28 @@ public partial class PlayerMovement : Node2D {
 	private bool acceptInputs = true;
 
 	private string[] playerForms = {
-		"ALPHA_PARTICLE_A",
-		"GRAIN_OF_SAND_A",
-		"STONE_A",
-		"BOULDER_A",
-		"SPACE_DEBRIS_A",
-		"METEOROID_A",
-		"PLANETOID_A",
-		"MOON_A",
-		"PLANET_A",
-		"GAS_GIANT_A",
-		"RED_DWARF_A",
-		"G_TYPE_A",
-		"RED_GIANT_A",
-		"RED_SUPERGIANT_A",
-		"BLACK_HOLE_A"
+		"ALPHA_PARTICLE_",
+		"GRAIN_OF_SAND_",
+		"STONE_",
+		"BOULDER_",
+		"SPACE_DEBRIS_",
+		"METEOROID_",
+		"PLANETOID_",
+		"MOON_",
+		"PLANET_",
+		"GAS_GIANT_",
+		"RED_DWARF_",
+		"G_TYPE_",
+		"RED_GIANT_",
+		"RED_SUPERGIANT_",
+		"BLACK_HOLE_"
 	};
 	private int currentFormIndex = 0;
+	private string variant = "A";
 
 	public DebrisData CurrentForm {
 		get {
-			return DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex]);
+			return DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex] + variant);
 		}
 	}
 	public DebrisData NextForm {
@@ -55,7 +56,7 @@ public partial class PlayerMovement : Node2D {
 
 			int nextIndex = (currentFormIndex + 1);
 
-			if (nextIndex < playerForms.Length) return DebrisManager.Instance.GetDebrisType(playerForms[nextIndex]);
+			if (nextIndex < playerForms.Length) return DebrisManager.Instance.GetDebrisType(playerForms[nextIndex] + "A");
 			else return null;
 		}
 	}
@@ -76,6 +77,16 @@ public partial class PlayerMovement : Node2D {
 
 		EmitSignal(SignalName.OnLevelUp);
 		EmitSignal(SignalName.OnMassChange);
+
+		GameManager.Seed = GD.Randf();
+
+		if (GameManager.Seed < 0.25f && DebrisManager.Instance.DoesDebrisTypeExist(playerForms[currentFormIndex] + "B")) {
+			variant = "B";
+		} else {
+			variant = "A";
+		}
+
+		sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
 	}
 
 	public override void _Process(double delta) {
@@ -170,7 +181,15 @@ public partial class PlayerMovement : Node2D {
 
 		Color[] colours = currentFormData.ParticleColours;
 		CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 100, 1, colours, this);
+
 		currentFormIndex++;
+
+		if (GameManager.Seed < 0.25f && DebrisManager.Instance.DoesDebrisTypeExist(playerForms[currentFormIndex] + "B")) {
+			variant = "B";
+		} else {
+			variant = "A";
+		}
+
 		sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
 
 		EmitSignal(SignalName.OnLevelUp);
@@ -210,7 +229,7 @@ public partial class PlayerMovement : Node2D {
 			CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, 1, CurrentForm.ParticleColours, collider);
 			DebrisManager.Instance.ClearActiveDebris();
 
-			GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0]).Mass;
+			GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0] + "A").Mass;
 			GameManager.GameScale = GameManager.CurrentMass;
 
 			GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);

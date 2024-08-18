@@ -27,6 +27,7 @@ public class DebrisManager {
 
 	private void InitDebrisTypes() {
 		AddDebrisType(new DebrisData("ALPHA_PARTICLE_A", "res://Assets/Textures/Sprites/Alpha Particle.png", 1, new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
+		AddDebrisType(new DebrisData("ALPHA_PARTICLE_B", "res://Assets/Textures/Sprites/Alpha_Particle_B.png", 1, new Color("#FF3A3D"), new Color("#CE0003"), new Color("#3251FF"), new Color("#001BB5")));
 
 		AddDebrisType(new DebrisData("GRAIN_OF_SAND_A", "res://Assets/Textures/Sprites/Grain of Sand.png", 4, new Color("#FDEE9D")));
 
@@ -78,6 +79,10 @@ public class DebrisManager {
 		}
 
 		return null;
+	}
+
+	public bool DoesDebrisTypeExist(string debrisName) {
+		return debrisTypes.ContainsKey(debrisName);
 	}
 
 	public DebrisData GetDebrisType(int index) {

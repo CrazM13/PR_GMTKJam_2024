@@ -9,4 +9,7 @@ public static class GameManager {
 
 	public static float GameTime = 0;
 
+
+	public static float Seed = 0;
+
 }
