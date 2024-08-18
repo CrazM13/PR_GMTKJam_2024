@@ -103,10 +103,10 @@ public partial class PlayerMovement : Node2D {
 		}
 
 		emmisionFrames++;
-		if (emmisionFrames == 10) {
+		if (emmisionFrames == 5) {
 			DebrisData currentFormData = CurrentForm;
 			if (currentFormData.PassiveParticleColours != null) {
-				CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 10, 1, currentFormData.PassiveParticleColours);
+				CustomParticles.Instance.SpawnParticles(GlobalPosition + (new Vector2(MathF.Cos(GameManager.GameTime * 10), Mathf.Sin(GameManager.GameTime * 10)) * 13), 1, 10, 1, currentFormData.PassiveParticleColours);
 			}
 
 			emmisionFrames = 0;
