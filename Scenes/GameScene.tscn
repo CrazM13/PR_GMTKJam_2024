@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=17 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://Scripts/UI/UIZoomLevel.cs" id="6_f6sk2"]
 [ext_resource type="AudioStream" uid="uid://bdhbe62fdhtyo" path="res://Assets/Audio/SFX/Breaking.wav" id="6_w2boq"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_fxyhk"]
+[ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
+[ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
@@ -135,6 +137,15 @@ drag_vertical_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("2_8oanl")
 
+[node name="ArrowHelper" type="Node2D" parent="."]
+position = Vector2(577, 326)
+script = ExtResource("11_ldd6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="ArrowHelper"]
+texture_filter = 1
+position = Vector2(56, 0)
+texture = ExtResource("9_cg75h")
+
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera", "audio")]
 position = Vector2(577, 326)
 script = ExtResource("3_tawnv")
@@ -152,6 +163,12 @@ script = ExtResource("5_h2ipd")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+update_scale = false
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../ArrowHelper")
+update_rotation = false
+update_scale = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("6_w2boq")

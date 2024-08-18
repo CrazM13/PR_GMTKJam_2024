@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
 public class DebrisManager {
 
 	private const string PATH_TO_PREFAB = "res://Assets/Prefabs/base_debris.tscn";
@@ -195,6 +194,25 @@ public class DebrisManager {
 
 	public void ClearActiveDebris() {
 		activeDebris.Clear();
+	}
+
+	public DebrisNode GetNearestConsumable(Vector2 position) {
+
+		DebrisNode nearestDebris = null;
+		float nearestDist = float.MaxValue;
+
+		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
+			bool isConsumable = debris.Value.Data.Mass <= GameManager.CurrentMass;
+			if (isConsumable) {
+				float distance = position.DistanceSquaredTo(debris.Value.GlobalPosition);
+				if (distance < nearestDist) {
+					nearestDist = distance;
+					nearestDebris = debris.Value;
+				}
+			}
+		}
+
+		return nearestDebris;
 	}
 
 }
