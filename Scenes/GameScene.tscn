@@ -143,7 +143,7 @@ script = ExtResource("11_ldd6m")
 
 [node name="Sprite2D" type="Sprite2D" parent="ArrowHelper"]
 texture_filter = 1
-position = Vector2(56, 0)
+position = Vector2(72, 0)
 texture = ExtResource("9_cg75h")
 
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera", "audio")]

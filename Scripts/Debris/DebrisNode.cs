@@ -48,7 +48,7 @@ public partial class DebrisNode : Node2D {
 
 		emmisionFrames++;
 		if (emmisionFrames == 32) {
-			if (Data.PassiveParticleColours != null) {
+			if (TargetScale >= 1 && Data.PassiveParticleColours != null) {
 				CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 100 + (50 * TargetScale * 0.5f), Mathf.Max(1, TargetScale * 0.5f), Data.PassiveParticleColours, this);
 			}
 

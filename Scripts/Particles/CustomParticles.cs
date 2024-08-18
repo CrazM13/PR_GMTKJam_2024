@@ -76,7 +76,7 @@ public partial class CustomParticles : Node2D {
 					particle.Velocity += direction * (float) delta * 4;
 				}
 
-				if (particle.Age > 1f && particle.Position.DistanceSquaredTo(particle.Attractor.GlobalPosition) < 100f * particle.Attractor.GlobalScale.X) {
+				if (particle.Age > 0.25f && particle.Position.DistanceSquaredTo(particle.Attractor.GlobalPosition) < 256f * particle.Attractor.GlobalScale.X) {
 					particle.Age += 100f;
 				}
 			}
