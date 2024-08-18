@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://1tt6ywmkt6xs"]
+[gd_scene load_steps=11 format=3 uid="uid://1tt6ywmkt6xs"]
 
 [ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="1_ihgnj"]
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_j7lwx"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="5_wn4wx"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="7_7ere3"]
+[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="8_3diu3"]
+[ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="9_5d54k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dgmmd"]
 font_size = 148
@@ -94,6 +96,13 @@ text = "Quit"
 icon = ExtResource("6_ps1w5")
 icon_alignment = 1
 expand_icon = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_3diu3")
+autoplay = true
+bus = &"Music"
+script = ExtResource("9_5d54k")
+musicGroup = "menu"
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Options" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/OptionsMenu.tscn"]]

@@ -3,12 +3,16 @@ using System;
 
 public partial class PersistantMusic : AudioStreamPlayer {
 
+	[Export] private string musicGroup;
+
 	private static float playbackPosition;
+	private static string currentGroup;
 
 	public override void _Ready() {
 		base._Ready();
 
-		this.Seek(playbackPosition);
+		if (musicGroup == currentGroup) this.Seek(playbackPosition);
+		else currentGroup = musicGroup;
 
 		this.Finished += OnMusicFinish;
 	}

@@ -8,7 +8,6 @@ public partial class PlayerMovement : Node2D {
 	[Export] private ScaleCamera camera;
 	[Export] private AudioStreamPlayer2D audio;
 
-	public float Range { get; set; } = 20;
 	public float TargetScale {
 		get => targetScale;
 		set {
@@ -197,13 +196,13 @@ public partial class PlayerMovement : Node2D {
 
 	private void InteractWithDebris() {
 		float currentMass = GameManager.CurrentMass;
-		DebrisManager.Instance.DisplayNearbyEffect(this, Range * 4, 0.1f);
+		DebrisManager.Instance.DisplayNearbyEffect(this, GameManager.defaultReachDistance * 4, 0.1f);
 		if (currentMass != GameManager.CurrentMass) {
 			EmitSignal(SignalName.OnMassChange);
 			TargetScale = GameManager.CurrentMass / GameManager.GameScale;
 		}
 
-		float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range * TargetScale) * consumptionEffeciency;
+		float consumedMass = DebrisManager.Instance.AttemptConsume(this, GameManager.defaultReachDistance * TargetScale) * consumptionEffeciency;
 		if (consumedMass > 0) {
 			ShakeCamera(100, 100);
 			GameManager.CurrentMass += consumedMass;
@@ -220,7 +219,7 @@ public partial class PlayerMovement : Node2D {
 			}
 		}
 
-		Node2D collider = DebrisManager.Instance.CheckCollision(this, Range);
+		Node2D collider = DebrisManager.Instance.CheckCollision(this, GameManager.defaultReachDistance);
 		if (collider != null) {
 			ShakeCamera(100, 100);
 			PlayBreakingSFX();
@@ -249,7 +248,7 @@ public partial class PlayerMovement : Node2D {
 	public override void _Draw() {
 		base._Draw();
 
-		if (GameManager.displayHitboxSetting > 0) DrawCircle(Vector2.Zero, Range * TargetScale, new Color(0.7f, 0.7f, 1f, 0.25f));
-		if (GameManager.displayHitboxSetting > 1) DrawCircle(Vector2.Zero, Range * TargetScale * 4, new Color(0.7f, 0.7f, 1f, 0.125f));
+		if (GameManager.displayHitboxSetting > 0) DrawCircle(Vector2.Zero, GameManager.defaultReachDistance, new Color(0.7f, 0.7f, 1f, 0.25f));
+		if (GameManager.displayHitboxSetting > 1) DrawCircle(Vector2.Zero, GameManager.defaultReachDistance * 4, new Color(0.7f, 0.7f, 1f, 0.125f));
 	}
 }

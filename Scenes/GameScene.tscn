@@ -188,6 +188,7 @@ stream = ExtResource("7_fxyhk")
 autoplay = true
 bus = &"Music"
 script = ExtResource("15_8bfrw")
+musicGroup = "game"
 
 [connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/Zoom/Zoom2" method="OnLevelUp"]

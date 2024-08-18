@@ -62,4 +62,23 @@ public partial class DebrisNode : Node2D {
 		Data = data;
 	}
 
+	public override void _Draw() {
+		base._Draw();
+
+		if (GameManager.displayHitboxSetting > 0) {
+			DrawCircle(Vector2.Zero, GameManager.defaultReachDistance, new Color(1f, 0.7f, 0.7f, 0.25f));
+		}
+
+		if (GameManager.displayHitboxSetting > 1) {
+
+			float interactionDistance = GameManager.defaultReachDistance * 4;
+			float simulatedInteractionDistance = interactionDistance * TargetScale;
+			if (simulatedInteractionDistance > 500) {
+				interactionDistance = 500 / TargetScale;
+			}
+
+			DrawCircle(Vector2.Zero, interactionDistance, new Color(1f, 0.7f, 0.7f, 0.125f));
+		}
+
+	}
 }

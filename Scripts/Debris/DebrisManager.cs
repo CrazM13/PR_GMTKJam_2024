@@ -184,7 +184,7 @@ public class DebrisManager {
 
 						DebrisData currentFormData = consumer.CurrentForm;
 						if (GameManager.CurrentMass > currentFormData.Mass) {
-							GameManager.CurrentMass = Mathf.Max(GameManager.CurrentMass - 0.01f, currentFormData.Mass);
+							GameManager.CurrentMass = Mathf.Max(GameManager.CurrentMass * 0.99f, currentFormData.Mass);
 						}
 					}
 				}

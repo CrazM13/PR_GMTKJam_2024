@@ -16,4 +16,6 @@ public static class GameManager {
 	public static int displayHitboxSetting = 0;
 	public static bool showHelpArrow = true;
 
+	public static float defaultReachDistance = 20;
+
 }

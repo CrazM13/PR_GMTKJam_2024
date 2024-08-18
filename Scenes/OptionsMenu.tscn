@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://uhfaocn1pxkb"]
+[gd_scene load_steps=14 format=3 uid="uid://uhfaocn1pxkb"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_8s7y2"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="2_ylo7d"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/Options/HitboxDisplayOption.cs" id="6_fwn03"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/HelpArrowOption.cs" id="7_tkaa3"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_wrpeo"]
+[ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="11_uuvv6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d57ki"]
 font_size = 148
@@ -228,6 +229,8 @@ expand_icon = true
 stream = ExtResource("7_wrpeo")
 autoplay = true
 bus = &"Music"
+script = ExtResource("11_uuvv6")
+musicGroup = "menu"
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/MainMenu.tscn"]]
