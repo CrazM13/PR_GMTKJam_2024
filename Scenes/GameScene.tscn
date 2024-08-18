@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=11 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
+[ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="2_q2j3u"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.cs" id="3_tawnv"]
+[ext_resource type="Script" path="res://Scripts/UI/LevelUpBar.cs" id="4_6gmew"]
 [ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="4_lc7c3"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisRotation.cs" id="5_h2ipd"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="6_4acm6"]
@@ -14,6 +16,59 @@
 [node name="SceneBaseResources" parent="." instance=ExtResource("1_c1l5s")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme = ExtResource("2_q2j3u")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_lc7c3")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer" node_paths=PackedStringArray("player", "beforeImage", "afterImage")]
+custom_minimum_size = Vector2(512, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+value = 1.0
+show_percentage = false
+script = ExtResource("4_6gmew")
+player = NodePath("../../../../../Player")
+beforeImage = NodePath("../TextureRect")
+afterImage = NodePath("../TextureRect2")
+fillSpeed = 2.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_lc7c3")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 326)
@@ -56,4 +111,6 @@ stream = ExtResource("7_fxyhk")
 autoplay = true
 bus = &"Music"
 
+[connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
+[connection signal="OnMassChange" from="Player" to="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnMassChange"]
 [connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]

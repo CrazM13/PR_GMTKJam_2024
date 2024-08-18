@@ -45,16 +45,36 @@ public partial class PlayerMovement : Node2D {
 	};
 	private int currentFormIndex = 0;
 
-	public DebrisData CurrentForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex]);
-	public DebrisData NextForm => DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex + 1]);
+	public DebrisData CurrentForm {
+		get {
+			return DebrisManager.Instance.GetDebrisType(playerForms[currentFormIndex]);
+		}
+	}
+	public DebrisData NextForm {
+		get {
+
+			int nextIndex = (currentFormIndex + 1);
+
+			if (nextIndex < playerForms.Length) return DebrisManager.Instance.GetDebrisType(playerForms[nextIndex]);
+			else return null;
+		}
+	}
 
 	private int emmisionFrames = 0;
+
+	#region Signals
+	[Signal] public delegate void OnLevelUpEventHandler();
+	[Signal] public delegate void OnMassChangeEventHandler();
+	#endregion
 
 	public override void _Ready() {
 		base._Ready();
 
 		Scale = new Vector2(0, 0);
 		DebrisManager.Instance.ClearActiveDebris();
+
+		EmitSignal(SignalName.OnLevelUp);
+		EmitSignal(SignalName.OnMassChange);
 	}
 
 	public override void _Process(double delta) {
@@ -81,8 +101,10 @@ public partial class PlayerMovement : Node2D {
 		bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Equal);
 		if (isCheatKeyNowPressed && !isCheatkeyPressed) {
 			GameManager.CurrentMass += CurrentForm.Mass * consumptionEffeciency;
+			EmitSignal(SignalName.OnMassChange);
 
-			if (GameManager.CurrentMass >= NextForm.Mass) {
+			DebrisData nextForm = NextForm;
+			if (nextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
 				LevelUp();
 			} else {
 				TargetScale = GameManager.CurrentMass / GameManager.GameScale;
@@ -118,6 +140,7 @@ public partial class PlayerMovement : Node2D {
 			if (consumedMass > 0) {
 				ShakeCamera(100, 100);
 				GameManager.CurrentMass += consumedMass;
+				EmitSignal(SignalName.OnMassChange);
 
 				if (GameManager.CurrentMass >= NextForm.Mass) {
 					LevelUp();
@@ -160,5 +183,7 @@ public partial class PlayerMovement : Node2D {
 		CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 100, 1, colours, this);
 		currentFormIndex++;
 		sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
+
+		EmitSignal(SignalName.OnLevelUp);
 	}
 }
