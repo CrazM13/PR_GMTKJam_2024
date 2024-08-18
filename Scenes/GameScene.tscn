@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=18 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_fxyhk"]
 [ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
+[ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
@@ -186,6 +187,7 @@ camera = NodePath("../Player")
 stream = ExtResource("7_fxyhk")
 autoplay = true
 bus = &"Music"
+script = ExtResource("15_8bfrw")
 
 [connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/Zoom/Zoom2" method="OnLevelUp"]
