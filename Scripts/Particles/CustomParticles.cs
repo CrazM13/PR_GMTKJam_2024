@@ -31,10 +31,14 @@ public partial class CustomParticles : Node2D {
 	private List<Particle> particles;
 	private RandomNumberGenerator rng;
 
+	private int numOfParticlesSpawned = 0;
+
 	public void SpawnParticles(Vector2 position, int count, float speed, float scale, Color[] colors, Node2D attractor = null) {
 		int cOffset = rng.RandiRange(0, colors.Length);
 
 		for (int i = 0; i < count; i++) {
+			numOfParticlesSpawned++;
+
 			float offsetX = rng.Randf();
 			float offsetY = rng.Randf();
 			float angle = rng.RandfRange(-Mathf.Pi, Mathf.Pi);
@@ -48,7 +52,7 @@ public partial class CustomParticles : Node2D {
 				Attractor = attractor
 			};
 
-			particles.Add(particle);
+			if (GameManager.particlesAmount != 0 && (numOfParticlesSpawned % GameManager.particlesAmount) == 0) particles.Add(particle);
 		}
 
 		QueueRedraw();

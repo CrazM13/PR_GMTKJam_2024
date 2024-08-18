@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c4rluknvcil5d"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c4rluknvcil5d"]
 
 [ext_resource type="FontFile" uid="uid://cuhrcs35ldyej" path="res://Assets/Fonts/Silkscreen/slkscr.ttf" id="1_d1bva"]
 [ext_resource type="Texture2D" uid="uid://jtl5jnrd722s" path="res://Assets/Textures/UI/9SliceOutline.png" id="2_m7pxu"]
@@ -32,6 +32,13 @@ texture = ExtResource("4_6y7dg")
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 2
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pt6ii"]
+texture = ExtResource("2_m7pxu")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
@@ -45,8 +52,15 @@ Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 16
 Label/font_sizes/font_size = 48
 Label/fonts/font = ExtResource("1_d1bva")
+OptionButton/font_sizes/font_size = 32
 Panel/styles/panel = SubResource("StyleBoxTexture_nq70y")
+PopupMenu/fonts/font = ExtResource("1_d1bva")
 ProgressBar/font_sizes/font_size = 24
 ProgressBar/fonts/font = ExtResource("1_d1bva")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_2ifcx")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_mypfg")
+TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
+TabContainer/constants/outline_size = 8
+TabContainer/font_sizes/font_size = 24
+TabContainer/fonts/font = ExtResource("1_d1bva")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_pt6ii")

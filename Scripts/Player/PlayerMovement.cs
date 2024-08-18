@@ -8,7 +8,7 @@ public partial class PlayerMovement : Node2D {
 	[Export] private ScaleCamera camera;
 	[Export] private AudioStreamPlayer2D audio;
 
-	public float Range { get; set; } = 16;
+	public float Range { get; set; } = 20;
 	public float TargetScale {
 		get => targetScale;
 		set {
@@ -244,5 +244,12 @@ public partial class PlayerMovement : Node2D {
 
 		GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0] + "A").Mass;
 		GameManager.GameScale = GameManager.CurrentMass;
+	}
+
+	public override void _Draw() {
+		base._Draw();
+
+		if (GameManager.displayHitboxSetting > 0) DrawCircle(Vector2.Zero, Range * TargetScale, new Color(0.7f, 0.7f, 1f, 0.25f));
+		if (GameManager.displayHitboxSetting > 1) DrawCircle(Vector2.Zero, Range * TargetScale * 4, new Color(0.7f, 0.7f, 1f, 0.125f));
 	}
 }
