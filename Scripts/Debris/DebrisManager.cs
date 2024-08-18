@@ -45,7 +45,8 @@ public class DebrisManager {
 		
 		AddDebrisType(new DebrisData("PLANET_A", "res://Assets/Textures/Sprites/Planet_A.png", 65536, new Color("#D37474"), new Color("#CE5454"), new Color("#774141")));
 		AddDebrisType(new DebrisData("PLANET_B", "res://Assets/Textures/Sprites/Planet_B.png", 65536, new Color("#0220FF"), new Color("#3B9357"), new Color("#071EC2")));
-		
+		AddDebrisType(new DebrisData("PLANET_S", "res://Assets/Textures/Sprites/Planet_S.png", 65536, new Color("#771B00"), new Color("#FF5100"), new Color("#404040")).AddPassiveParticles(new Color("#757575"), new Color("#404040"), new Color("#585858")));
+
 		AddDebrisType(new DebrisData("GAS_GIANT_A", "res://Assets/Textures/Sprites/Gas_Giant_A.png", 262144, new Color("#93B2FF"), new Color("#446FE5"), new Color("#3B60C6")));
 		
 		AddDebrisType(new DebrisData("RED_DWARF_A", "res://Assets/Textures/Sprites/Red_Dwarf_A.png", 1048576, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
