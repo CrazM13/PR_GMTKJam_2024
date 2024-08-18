@@ -46,7 +46,7 @@ public partial class DebrisNode : Node2D {
 			Scale = new Vector2(currentScale, currentScale);
 		}
 
-		emmisionFrames++;
+		if ((float) delta != 0) emmisionFrames++;
 		if (emmisionFrames == 32) {
 			if (TargetScale >= 1 && Data.PassiveParticleColours != null) {
 				CustomParticles.Instance.SpawnParticles(GlobalPosition, 1, 100 + (50 * TargetScale * 0.5f), Mathf.Max(1, TargetScale * 0.5f), Data.PassiveParticleColours, this);
@@ -65,13 +65,13 @@ public partial class DebrisNode : Node2D {
 	public override void _Draw() {
 		base._Draw();
 
-		if (GameManager.displayHitboxSetting > 0) {
-			DrawCircle(Vector2.Zero, GameManager.defaultReachDistance, new Color(1f, 0.7f, 0.7f, 0.25f));
+		if (GameManager.DisplayHitboxSetting > 0) {
+			DrawCircle(Vector2.Zero, GameManager.DefaultReachDistance, new Color(1f, 0.7f, 0.7f, 0.25f));
 		}
 
-		if (GameManager.displayHitboxSetting > 1) {
+		if (GameManager.DisplayHitboxSetting > 1) {
 
-			float interactionDistance = GameManager.defaultReachDistance * 4;
+			float interactionDistance = GameManager.DefaultReachDistance * 4;
 			float simulatedInteractionDistance = interactionDistance * TargetScale;
 			if (simulatedInteractionDistance > 500) {
 				interactionDistance = 500 / TargetScale;

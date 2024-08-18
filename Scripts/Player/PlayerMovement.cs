@@ -8,6 +8,7 @@ public partial class PlayerMovement : Node2D {
 	[Export] private ScaleCamera camera;
 	[Export] private AudioStreamPlayer2D audio;
 
+	public float Range { get; set; } = 16;
 	public float TargetScale {
 		get => targetScale;
 		set {
@@ -79,6 +80,15 @@ public partial class PlayerMovement : Node2D {
 
 		GameManager.Seed = GD.Randf();
 
+		for (int i = 1; i < playerForms.Length; i++) {
+			if (NextForm != null && NextForm.Mass <= GameManager.CurrentMass) {
+				currentFormIndex++;
+				EmitSignal(SignalName.OnLevelUp);
+			} else {
+				break;
+			}
+		}
+
 		if (GameManager.Seed < 0.25f && DebrisManager.Instance.DoesDebrisTypeExist(playerForms[currentFormIndex] + "B")) {
 			variant = "B";
 		} else {
@@ -86,6 +96,7 @@ public partial class PlayerMovement : Node2D {
 		}
 
 		sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
+		TargetScale = GameManager.CurrentMass / GameManager.GameScale;
 	}
 
 	public override void _Process(double delta) {
@@ -101,7 +112,7 @@ public partial class PlayerMovement : Node2D {
 			oldScale = Scale.X;
 		}
 
-		emmisionFrames++;
+		if ((float) delta != 0) emmisionFrames++;
 		if (emmisionFrames == 5) {
 			DebrisData currentFormData = CurrentForm;
 			if (currentFormData.PassiveParticleColours != null) {
@@ -131,12 +142,14 @@ public partial class PlayerMovement : Node2D {
 
 		if (acceptInputs) {
 
-			if (Input.IsActionPressed("time_sprint")) {
-				Engine.TimeScale = 1.5f;
-			} else if (Input.IsActionPressed("time_crawl")) {
-				Engine.TimeScale = 0.5f;
-			} else {
-				Engine.TimeScale = 1;
+			if (!GameManager.IsGamePaused) {
+				if (Input.IsActionPressed("time_sprint")) {
+					Engine.TimeScale = 1.5f;
+				} else if (Input.IsActionPressed("time_crawl")) {
+					Engine.TimeScale = 0.5f;
+				} else {
+					Engine.TimeScale = 1;
+				}
 			}
 
 			// Get the input direction and handle the movement/deceleration.
@@ -196,13 +209,13 @@ public partial class PlayerMovement : Node2D {
 
 	private void InteractWithDebris() {
 		float currentMass = GameManager.CurrentMass;
-		DebrisManager.Instance.DisplayNearbyEffect(this, GameManager.defaultReachDistance * 4, 0.1f);
+		DebrisManager.Instance.DisplayNearbyEffect(this, Range * 4, 0.1f);
 		if (currentMass != GameManager.CurrentMass) {
 			EmitSignal(SignalName.OnMassChange);
 			TargetScale = GameManager.CurrentMass / GameManager.GameScale;
 		}
 
-		float consumedMass = DebrisManager.Instance.AttemptConsume(this, GameManager.defaultReachDistance * TargetScale) * consumptionEffeciency;
+		float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range * TargetScale) * consumptionEffeciency;
 		if (consumedMass > 0) {
 			ShakeCamera(100, 100);
 			GameManager.CurrentMass += consumedMass;
@@ -219,7 +232,7 @@ public partial class PlayerMovement : Node2D {
 			}
 		}
 
-		Node2D collider = DebrisManager.Instance.CheckCollision(this, GameManager.defaultReachDistance);
+		Node2D collider = DebrisManager.Instance.CheckCollision(this, Range);
 		if (collider != null) {
 			ShakeCamera(100, 100);
 			PlayBreakingSFX();
@@ -248,7 +261,7 @@ public partial class PlayerMovement : Node2D {
 	public override void _Draw() {
 		base._Draw();
 
-		if (GameManager.displayHitboxSetting > 0) DrawCircle(Vector2.Zero, GameManager.defaultReachDistance, new Color(0.7f, 0.7f, 1f, 0.25f));
-		if (GameManager.displayHitboxSetting > 1) DrawCircle(Vector2.Zero, GameManager.defaultReachDistance * 4, new Color(0.7f, 0.7f, 1f, 0.125f));
+		if (GameManager.DisplayHitboxSetting > 0) DrawCircle(Vector2.Zero, GameManager.DefaultReachDistance, new Color(0.7f, 0.7f, 1f, 0.25f));
+		if (GameManager.DisplayHitboxSetting > 1) DrawCircle(Vector2.Zero, GameManager.DefaultReachDistance * 4, new Color(0.7f, 0.7f, 1f, 0.125f));
 	}
 }

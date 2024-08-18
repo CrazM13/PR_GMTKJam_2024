@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=21 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -11,7 +11,10 @@
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="6_4acm6"]
 [ext_resource type="Script" path="res://Scripts/UI/UIZoomLevel.cs" id="6_f6sk2"]
 [ext_resource type="AudioStream" uid="uid://bdhbe62fdhtyo" path="res://Assets/Audio/SFX/Breaking.wav" id="6_w2boq"]
+[ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="7_eu5w8"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_fxyhk"]
+[ext_resource type="Script" path="res://Scripts/UI/PauseMenu.cs" id="7_u2513"]
+[ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="8_76oqu"]
 [ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
@@ -26,9 +29,9 @@ font_size = 24
 
 [node name="SceneBaseResources" parent="." instance=ExtResource("1_c1l5s")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Panel" type="Panel" parent="HUD"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 32)
 anchors_preset = 10
@@ -36,7 +39,7 @@ anchor_right = 1.0
 grow_horizontal = 2
 theme = ExtResource("2_q2j3u")
 
-[node name="Timer" type="Label" parent="CanvasLayer/Panel"]
+[node name="Timer" type="Label" parent="HUD/Panel"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -53,7 +56,7 @@ text = "Time:"
 label_settings = SubResource("LabelSettings_mi75w")
 script = ExtResource("3_32873")
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Panel"]
+[node name="CenterContainer" type="CenterContainer" parent="HUD/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,16 +64,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Panel/CenterContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_lc7c3")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer" node_paths=PackedStringArray("player", "beforeImage", "afterImage")]
+[node name="ProgressBar" type="ProgressBar" parent="HUD/Panel/CenterContainer/HBoxContainer" node_paths=PackedStringArray("player", "beforeImage", "afterImage")]
 custom_minimum_size = Vector2(512, 28)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -84,7 +87,7 @@ beforeImage = NodePath("../TextureRect")
 afterImage = NodePath("../TextureRect2")
 fillSpeed = 2.0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar"]
+[node name="Panel" type="Panel" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,13 +95,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Panel/CenterContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_lc7c3")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Zoom" type="Label" parent="CanvasLayer/Panel"]
+[node name="Zoom" type="Label" parent="HUD/Panel"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -112,7 +115,7 @@ text = "Zoom: 10"
 label_settings = SubResource("LabelSettings_mi75w")
 vertical_alignment = 2
 
-[node name="Zoom2" type="Label" parent="CanvasLayer/Panel/Zoom" node_paths=PackedStringArray("player")]
+[node name="Zoom2" type="Label" parent="HUD/Panel/Zoom" node_paths=PackedStringArray("player")]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -129,6 +132,72 @@ clip_text = true
 script = ExtResource("6_f6sk2")
 player = NodePath("../../../../Player")
 zoomSpeed = 10.0
+
+[node name="Pause Menu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" type="Panel" parent="Pause Menu"]
+visible = false
+custom_minimum_size = Vector2(0, 256)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_q2j3u")
+script = ExtResource("7_u2513")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause Menu/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pause Menu/PauseMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pause Menu/PauseMenu/VBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "Paused"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pause Menu/PauseMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Resume"
+icon = ExtResource("4_lc7c3")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Options" type="Button" parent="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Options"
+icon = ExtResource("7_eu5w8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Quit"
+icon = ExtResource("8_76oqu")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 326)
@@ -190,7 +259,15 @@ bus = &"Music"
 script = ExtResource("15_8bfrw")
 musicGroup = "game"
 
-[connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
-[connection signal="OnLevelUp" from="Player" to="CanvasLayer/Panel/Zoom/Zoom2" method="OnLevelUp"]
-[connection signal="OnMassChange" from="Player" to="CanvasLayer/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnMassChange"]
+[connection signal="OnMenuStateChanged" from="Pause Menu/PauseMenu" to="Player" method="ReactToPauseMenu"]
+[connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Resume" to="Pause Menu/PauseMenu" method="SetMenuState" binds= [false]]
+[connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Options" to="Pause Menu/PauseMenu" method="HideMenu"]
+[connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Options" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/OptionsMenu.tscn"]]
+[connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="SceneBaseResources/SceneTransition" method="Quit"]
+[connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="Pause Menu/PauseMenu" method="HideMenu"]
+[connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
+[connection signal="OnLevelUp" from="Player" to="HUD/Panel/Zoom/Zoom2" method="OnLevelUp"]
+[connection signal="OnMassChange" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnMassChange"]
 [connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]
+
+[editable path="SceneBaseResources"]

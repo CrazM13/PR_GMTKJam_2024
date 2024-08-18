@@ -12,10 +12,12 @@ public static class GameManager {
 
 	public static float Seed = 0;
 
-	public static int particlesAmount = 1;
-	public static int displayHitboxSetting = 0;
-	public static bool showHelpArrow = true;
+	public static int ParticlesAmount = 1;
+	public static int DisplayHitboxSetting = 0;
+	public static bool ShowHelpArrow = true;
 
-	public static float defaultReachDistance = 20;
+	public static float DefaultReachDistance = 20;
+
+	public static bool IsGamePaused = false;
 
 }

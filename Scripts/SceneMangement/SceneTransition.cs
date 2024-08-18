@@ -8,6 +8,8 @@ public partial class SceneTransition : AnimationPlayer {
 	private string pathToLoad = "";
 	private float delay = 0;
 
+	private static string lastScene;
+
 	public override void _Ready() {
 		this.PlayBackwards(animationName);
 		this.AnimationFinished += OnAnimationFinish;
@@ -24,6 +26,7 @@ public partial class SceneTransition : AnimationPlayer {
 
 	private void OnAnimationFinish(StringName _) {
 		if (!string.IsNullOrEmpty(pathToLoad)) {
+			lastScene = GetTree().CurrentScene.SceneFilePath;
 			GetTree().ChangeSceneToFile(pathToLoad);
 			pathToLoad = "";
 		}
@@ -46,6 +49,14 @@ public partial class SceneTransition : AnimationPlayer {
 
 	public void ReloadScene(float delay) {
 		LoadScene(GetTree().CurrentScene.SceneFilePath, delay);
+	}
+
+	public void GoToLastScene() {
+		LoadScene(lastScene);
+	}
+
+	public void GoToLastScene(float delay) {
+		LoadScene(lastScene, delay);
 	}
 
 	public void Quit() {

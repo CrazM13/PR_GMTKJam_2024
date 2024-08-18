@@ -52,7 +52,7 @@ public partial class CustomParticles : Node2D {
 				Attractor = attractor
 			};
 
-			if (GameManager.particlesAmount != 0 && (numOfParticlesSpawned % GameManager.particlesAmount) == 0) particles.Add(particle);
+			if (GameManager.ParticlesAmount != 0 && (numOfParticlesSpawned % GameManager.ParticlesAmount) == 0) particles.Add(particle);
 		}
 
 		QueueRedraw();

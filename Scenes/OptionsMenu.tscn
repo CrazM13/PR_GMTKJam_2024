@@ -233,6 +233,6 @@ script = ExtResource("11_uuvv6")
 musicGroup = "menu"
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
-[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/MainMenu.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="GoToLastScene"]
 
 [editable path="SceneBaseResources"]

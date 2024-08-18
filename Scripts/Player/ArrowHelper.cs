@@ -6,11 +6,11 @@ public partial class ArrowHelper : Node2D {
 	public override void _Ready() {
 		base._Ready();
 
-		Visible = GameManager.showHelpArrow;
+		Visible = GameManager.ShowHelpArrow;
 	}
 
 	public override void _Process(double delta) {
-		if (GameManager.showHelpArrow) {
+		if (GameManager.ShowHelpArrow) {
 			DebrisNode nearest = DebrisManager.Instance.GetNearestConsumable(GlobalPosition);
 
 			if (nearest != null && GlobalPosition.DistanceSquaredTo(nearest.GlobalPosition) >= 10000) {

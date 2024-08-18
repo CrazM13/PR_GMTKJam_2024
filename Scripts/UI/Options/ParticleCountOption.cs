@@ -14,20 +14,20 @@ public partial class ParticleCountOption : OptionButton {
 		
 		switch (index) {
 			case 0:
-				GameManager.particlesAmount = 1;
+				GameManager.ParticlesAmount = 1;
 				break;
 			case 1:
-				GameManager.particlesAmount = 5;
+				GameManager.ParticlesAmount = 5;
 				break;
 			case 2:
-				GameManager.particlesAmount = 0;
+				GameManager.ParticlesAmount = 0;
 				break;
 		}
 
 	}
 
 	private int OptionToIndex() {
-		int option = GameManager.particlesAmount;
+		int option = GameManager.ParticlesAmount;
 
 		switch (option) {
 			case 0:
