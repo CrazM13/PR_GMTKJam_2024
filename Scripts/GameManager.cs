@@ -3,9 +3,9 @@ using System;
 
 public static class GameManager {
 
-	public static float CurrentMass = 100;
+	public static float CurrentMass = 1;
 
-	public static float GameScale = 100;
+	public static float GameScale = 1;
 
 	public static float GameTime = 0;
 

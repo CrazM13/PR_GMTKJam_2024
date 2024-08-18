@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Security.AccessControl;
 
 public partial class DebrisSpawner : Timer {
 
@@ -21,7 +22,7 @@ public partial class DebrisSpawner : Timer {
 		Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
 
-		return camera.GlobalPosition + (direction * 750);
+		return camera.GlobalPosition + (direction * 1750);
 
 	}
 
@@ -31,14 +32,46 @@ public partial class DebrisSpawner : Timer {
 
 		DebrisManager manager = DebrisManager.Instance;
 
-		Node2D newNode = manager.SpawnDebris(manager.GetDebrisType(rng.RandiRange(0, 100)));
+		int maxWeight = 0;
+		int maxOptions = manager.GetDebrisTypeCount();
+
+		int[] weights = new int[maxOptions];
+
+		for (int i = 0; i < maxOptions; i++) {
+
+			DebrisData currentOption = manager.GetDebrisType(i);
+
+			if (currentOption.Mass < GameManager.CurrentMass * 4f && currentOption.Mass > GameManager.CurrentMass * 0.25f) {
+				weights[i] = 10;
+			}
+			else if(currentOption.Mass < GameManager.CurrentMass * 8f && currentOption.Mass > GameManager.CurrentMass * 0.0625f) {
+				weights[i] = 1;
+			} else {
+				weights[i] = 0;
+			}
+			
+			maxWeight += weights[i];
+		}
+
+		int rand = rng.RandiRange(0, maxWeight - 1);
+		int selected = -1;
+		for (int i = 0; i < maxOptions; i++) {
+			if (rand < weights[i]) {
+				selected = i;
+				break;
+			}
+
+			rand -= weights[i];
+		}
+
+		Node2D newNode = manager.SpawnDebris(manager.GetDebrisType(selected));
 		AddChild(newNode);
 		newNode.GlobalPosition = spawnPosition;
 	}
 
 	private void UpdateDebris() {
 		if (DebrisManager.Instance.GetActiveDebrisCount() < maxDebris) AttemptSpawn();
-		DebrisManager.Instance.CullDebris(camera.GlobalPosition, 1500);
+		DebrisManager.Instance.CullDebris(camera.GlobalPosition, 2500);
 	}
 
 }
