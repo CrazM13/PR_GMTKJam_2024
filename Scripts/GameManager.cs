@@ -7,4 +7,6 @@ public static class GameManager {
 
 	public static float GameScale = 100;
 
+	public static float GameTime = 0;
+
 }

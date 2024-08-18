@@ -26,21 +26,37 @@ public class DebrisManager {
 	}
 
 	private void InitDebrisTypes() {
-		AddDebrisType(new DebrisData("ALPHA_PARTICLE", "res://Assets/Textures/Sprites/Alpha Particle.png", 100, new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
-		AddDebrisType(new DebrisData("GRAIN_OF_SAND", "res://Assets/Textures/Sprites/Grain of Sand.png", 400, new Color("#FDEE9D")));
-		AddDebrisType(new DebrisData("STONE", "res://Assets/Textures/Sprites/Stone.png", 1600, new Color("#55B131"), new Color("#C3E3B6")));
-		AddDebrisType(new DebrisData("BOULDER", "res://Assets/Textures/Sprites/Boulder.png", 6400, new Color("#71736A"), new Color("#6D6A5B")));
-		AddDebrisType(new DebrisData("SPACE_DEBRIS", "res://Assets/Textures/Sprites/Space Debris.png", 25600, new Color("#88C66F"), new Color("#6D6658"), new Color("#FEED98")));
-		AddDebrisType(new DebrisData("METEOROID", "res://Assets/Textures/Sprites/Meteoroid.png", 102400, new Color("#71736A"), new Color("#6D6A5B")));
-		AddDebrisType(new DebrisData("PLANETOID", "res://Assets/Textures/Sprites/Planetoid.png", 409600, new Color("#71736A"), new Color("#6D6A5B")));
-		AddDebrisType(new DebrisData("MOON", "res://Assets/Textures/Sprites/Moon_A.png", 1638400, new Color("#EFFFFB"), new Color("#C2CECB")));
-		AddDebrisType(new DebrisData("PLANET", "res://Assets/Textures/Sprites/Planet_A.png", 6553600, new Color("#D37474"), new Color("#CE5454"), new Color("#774141")));
-		AddDebrisType(new DebrisData("GAS_GIANT", "res://Assets/Textures/Sprites/Gas_Giant_A.png", 26214400, new Color("#93B2FF"), new Color("#446FE5"), new Color("#3B60C6")));
-		AddDebrisType(new DebrisData("RED_DWARF", "res://Assets/Textures/Sprites/Red_Dwarf_A.png", 104857600, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
-		AddDebrisType(new DebrisData("G_TYPE", "res://Assets/Textures/Sprites/G_Type_A.png", 419430400, new Color("#FDFF93"), new Color("#FFE07C"), new Color("#FFD54C")).AddPassiveParticles(new Color("#FDFF93"), new Color("#FFE07C"), new Color("#FFD54C")));
-		AddDebrisType(new DebrisData("RED_GIANT", "res://Assets/Textures/Sprites/Red_Giant_A.png", 1677721600, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
-		AddDebrisType(new DebrisData("RED_SUPERGIANT", "res://Assets/Textures/Sprites/Red_Supergiant_A.png", 6710886400, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
-		AddDebrisType(new DebrisData("BLACK_HOLE", "res://Assets/Textures/Sprites/Black_Hole_A.png", 26843545600, new Color("#EFFFFB")).AddPassiveParticles(new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
+		AddDebrisType(new DebrisData("ALPHA_PARTICLE_A", "res://Assets/Textures/Sprites/Alpha Particle.png", 100, new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
+
+		AddDebrisType(new DebrisData("GRAIN_OF_SAND_A", "res://Assets/Textures/Sprites/Grain of Sand.png", 400, new Color("#FDEE9D")));
+
+		AddDebrisType(new DebrisData("STONE_A", "res://Assets/Textures/Sprites/Stone.png", 1600, new Color("#55B131"), new Color("#C3E3B6")));
+
+		AddDebrisType(new DebrisData("BOULDER_A", "res://Assets/Textures/Sprites/Boulder.png", 6400, new Color("#71736A"), new Color("#6D6A5B")));
+
+		AddDebrisType(new DebrisData("SPACE_DEBRIS_A", "res://Assets/Textures/Sprites/Space Debris.png", 25600, new Color("#88C66F"), new Color("#6D6658"), new Color("#FEED98")));
+
+		AddDebrisType(new DebrisData("METEOROID_A", "res://Assets/Textures/Sprites/Meteoroid.png", 102400, new Color("#71736A"), new Color("#6D6A5B")));
+
+		AddDebrisType(new DebrisData("PLANETOID_A", "res://Assets/Textures/Sprites/Planetoid.png", 409600, new Color("#71736A"), new Color("#6D6A5B")));
+
+		AddDebrisType(new DebrisData("MOON_A", "res://Assets/Textures/Sprites/Moon_A.png", 1638400, new Color("#EFFFFB"), new Color("#C2CECB")));
+		AddDebrisType(new DebrisData("MOON_B", "res://Assets/Textures/Sprites/Moon_B.png", 1638400, new Color("#FEFAA9"), new Color("#DDCE65"), new Color("#BFA950")));
+		
+		AddDebrisType(new DebrisData("PLANET_A", "res://Assets/Textures/Sprites/Planet_A.png", 6553600, new Color("#D37474"), new Color("#CE5454"), new Color("#774141")));
+		AddDebrisType(new DebrisData("PLANET_B", "res://Assets/Textures/Sprites/Planet_B.png", 6553600, new Color("#0220FF"), new Color("#3B9357"), new Color("#071EC2")));
+		
+		AddDebrisType(new DebrisData("GAS_GIANT_A", "res://Assets/Textures/Sprites/Gas_Giant_A.png", 26214400, new Color("#93B2FF"), new Color("#446FE5"), new Color("#3B60C6")));
+		
+		AddDebrisType(new DebrisData("RED_DWARF_A", "res://Assets/Textures/Sprites/Red_Dwarf_A.png", 104857600, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
+		
+		AddDebrisType(new DebrisData("G_TYPE_A", "res://Assets/Textures/Sprites/G_Type_A.png", 419430400, new Color("#FDFF93"), new Color("#FFE07C"), new Color("#FFD54C")).AddPassiveParticles(new Color("#FDFF93"), new Color("#FFE07C"), new Color("#FFD54C")));
+		
+		AddDebrisType(new DebrisData("RED_GIANT_A", "res://Assets/Textures/Sprites/Red_Giant_A.png", 1677721600, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
+		
+		AddDebrisType(new DebrisData("RED_SUPERGIANT_A", "res://Assets/Textures/Sprites/Red_Supergiant_A.png", 6710886400, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
+		
+		AddDebrisType(new DebrisData("BLACK_HOLE_A", "res://Assets/Textures/Sprites/Black_Hole_A.png", 26843545600, new Color("#EFFFFB")).AddPassiveParticles(new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
 	}
 
 	private Dictionary<string, DebrisData> debrisTypes;

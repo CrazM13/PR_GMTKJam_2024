@@ -27,21 +27,21 @@ public partial class PlayerMovement : Node2D {
 	private bool acceptInputs = true;
 
 	private string[] playerForms = {
-		"ALPHA_PARTICLE",
-		"GRAIN_OF_SAND",
-		"STONE",
-		"BOULDER",
-		"SPACE_DEBRIS",
-		"METEOROID",
-		"PLANETOID",
-		"MOON",
-		"PLANET",
-		"GAS_GIANT",
-		"RED_DWARF",
-		"G_TYPE",
-		"RED_GIANT",
-		"RED_SUPERGIANT",
-		"BLACK_HOLE"
+		"ALPHA_PARTICLE_A",
+		"GRAIN_OF_SAND_A",
+		"STONE_A",
+		"BOULDER_A",
+		"SPACE_DEBRIS_A",
+		"METEOROID_A",
+		"PLANETOID_A",
+		"MOON_A",
+		"PLANET_A",
+		"GAS_GIANT_A",
+		"RED_DWARF_A",
+		"G_TYPE_A",
+		"RED_GIANT_A",
+		"RED_SUPERGIANT_A",
+		"BLACK_HOLE_A"
 	};
 	private int currentFormIndex = 0;
 
@@ -59,6 +59,7 @@ public partial class PlayerMovement : Node2D {
 			else return null;
 		}
 	}
+	public int GetFormIndex => currentFormIndex;
 
 	private int emmisionFrames = 0;
 
@@ -79,6 +80,8 @@ public partial class PlayerMovement : Node2D {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
+
+		GameManager.GameTime += (float) delta;
 
 		if (scaleTime < 1) {
 			float currentScale = Scale.X;
