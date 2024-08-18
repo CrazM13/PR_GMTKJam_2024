@@ -54,7 +54,7 @@ public class DebrisManager {
 		
 		AddDebrisType(new DebrisData("RED_GIANT_A", "res://Assets/Textures/Sprites/Red_Giant_A.png", 16777216, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
 		
-		AddDebrisType(new DebrisData("RED_SUPERGIANT_A", "res://Assets/Textures/Sprites/Red_Supergiant_A.png", 67108864, new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")).AddPassiveParticles(new Color("#FF1C1C"), new Color("#FF5151"), new Color("#EF0000")));
+		AddDebrisType(new DebrisData("RED_SUPERGIANT_A", "res://Assets/Textures/Sprites/Blue_Supergiant_A.png", 67108864, new Color("#4353DB"), new Color("#0012B7"), new Color("#2F3999")).AddPassiveParticles(new Color("#4353DB"), new Color("#0012B7"), new Color("#2F3999")));
 		
 		AddDebrisType(new DebrisData("BLACK_HOLE_A", "res://Assets/Textures/Sprites/Black_Hole_A.png", 268435456, new Color("#EFFFFB")).AddPassiveParticles(new Color("#A8A285"), new Color("#797979"), new Color("#E63925"), new Color("#DE0000")));
 	}

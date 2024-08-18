@@ -148,6 +148,10 @@ public partial class PlayerMovement : Node2D {
 
 			InteractWithDebris();
 		}
+
+		if (currentFormIndex == playerForms.Length - 1 && !acceptInputs) {
+			CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 400, 1, CurrentForm.PassiveParticleColours);
+		}
 	}
 
 	public void ShakeCamera(float strength, float intencity) {
@@ -186,10 +190,14 @@ public partial class PlayerMovement : Node2D {
 			GameManager.CurrentMass += consumedMass;
 			EmitSignal(SignalName.OnMassChange);
 
-			if (GameManager.CurrentMass >= NextForm.Mass) {
+			if (NextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
 				LevelUp();
 			} else {
 				TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+
+				if (currentFormIndex == playerForms.Length - 1 && TargetScale > 1.1f) {
+					Win();
+				}
 			}
 		}
 
@@ -207,5 +215,12 @@ public partial class PlayerMovement : Node2D {
 
 			GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
 		}
+	}
+
+	private void Win() {
+		Engine.TimeScale = 0.25f;
+		TargetScale = 0;
+		acceptInputs = false;
+		GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(1f);
 	}
 }
