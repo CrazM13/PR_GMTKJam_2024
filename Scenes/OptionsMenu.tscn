@@ -55,10 +55,8 @@ label_settings = SubResource("LabelSettings_d57ki")
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
 
 [node name="Volume" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -124,6 +122,7 @@ script = ExtResource("4_w1apa")
 busName = "SFX"
 
 [node name="Video" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
