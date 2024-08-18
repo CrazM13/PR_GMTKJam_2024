@@ -134,34 +134,7 @@ public partial class PlayerMovement : Node2D {
 
 			Position += velocity * (float) delta;
 
-			DebrisManager.Instance.DisplayNearbyEffect(this, Range * 4, 0.1f);
-
-			float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range) * consumptionEffeciency;
-			if (consumedMass > 0) {
-				ShakeCamera(100, 100);
-				GameManager.CurrentMass += consumedMass;
-				EmitSignal(SignalName.OnMassChange);
-
-				if (GameManager.CurrentMass >= NextForm.Mass) {
-					LevelUp();
-				} else {
-					TargetScale = GameManager.CurrentMass / GameManager.GameScale;
-				}
-			}
-
-			Node2D collider = DebrisManager.Instance.CheckCollision(this, Range);
-			if (collider != null) {
-				ShakeCamera(100, 100);
-				PlayBreakingSFX();
-				acceptInputs = false;
-				Visible = false;
-				CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, 1, CurrentForm.ParticleColours, collider);
-				DebrisManager.Instance.ClearActiveDebris();
-
-				GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0]).Mass;
-
-				GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
-			}
+			InteractWithDebris();
 		}
 	}
 
@@ -185,5 +158,42 @@ public partial class PlayerMovement : Node2D {
 		sprite.Texture = ResourceLoader.Load<Texture2D>(CurrentForm.TexturePath);
 
 		EmitSignal(SignalName.OnLevelUp);
+	}
+
+	private void InteractWithDebris() {
+		float currentMass = GameManager.CurrentMass;
+		DebrisManager.Instance.DisplayNearbyEffect(this, Range * 4, 0.1f);
+		if (currentMass != GameManager.CurrentMass) {
+			EmitSignal(SignalName.OnMassChange);
+			TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+		}
+
+		float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range * TargetScale) * consumptionEffeciency;
+		if (consumedMass > 0) {
+			ShakeCamera(100, 100);
+			GameManager.CurrentMass += consumedMass;
+			EmitSignal(SignalName.OnMassChange);
+
+			if (GameManager.CurrentMass >= NextForm.Mass) {
+				LevelUp();
+			} else {
+				TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+			}
+		}
+
+		Node2D collider = DebrisManager.Instance.CheckCollision(this, Range);
+		if (collider != null) {
+			ShakeCamera(100, 100);
+			PlayBreakingSFX();
+			acceptInputs = false;
+			Visible = false;
+			CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, 1, CurrentForm.ParticleColours, collider);
+			DebrisManager.Instance.ClearActiveDebris();
+
+			GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0]).Mass;
+			GameManager.GameScale = GameManager.CurrentMass;
+
+			GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
+		}
 	}
 }

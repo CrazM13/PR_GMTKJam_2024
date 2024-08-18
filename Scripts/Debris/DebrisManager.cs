@@ -152,13 +152,14 @@ public class DebrisManager {
 		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
 			if (GD.Randf() > 1 - chance) {
 				if (debris.Value.Data.Mass <= GameManager.CurrentMass) {
-					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance) {
+					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < maxDistance * consumer.TargetScale) {
 						CustomParticles.Instance.SpawnParticles(debris.Value.GlobalPosition, 1, 10, 1, debris.Value.Data.ParticleColours, consumer);
 					}
 				} else {
 					if (debris.Value.GlobalPosition.DistanceTo(consumer.GlobalPosition) < Mathf.Min(maxDistance * debris.Value.TargetScale, 500)) {
 						CustomParticles.Instance.SpawnParticles(consumer.GlobalPosition, 1, 10, 1, consumer.CurrentForm.ParticleColours, debris.Value);
 						consumer.ShakeCamera(5f, 100f);
+						if (GameManager.CurrentMass > consumer.CurrentForm.Mass) GameManager.CurrentMass--;
 					}
 				}
 			}
