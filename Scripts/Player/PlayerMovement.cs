@@ -120,6 +120,15 @@ public partial class PlayerMovement : Node2D {
 	public override void _PhysicsProcess(double delta) {
 
 		if (acceptInputs) {
+
+			if (Input.IsActionPressed("time_sprint")) {
+				Engine.TimeScale = 1.5f;
+			} else if (Input.IsActionPressed("time_crawl")) {
+				Engine.TimeScale = 0.5f;
+			} else {
+				Engine.TimeScale = 1;
+			}
+
 			// Get the input direction and handle the movement/deceleration.
 			// As good practice, you should replace UI actions with custom gameplay actions.
 			Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
