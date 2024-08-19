@@ -169,7 +169,7 @@ public partial class PlayerMovement : Node2D {
 
 			Position += velocity * (float) delta;
 
-			InteractWithDebris();
+			if (!GameManager.IsGamePaused) InteractWithDebris();
 		}
 
 		if (currentFormIndex == playerForms.Length - 1 && !acceptInputs) {
