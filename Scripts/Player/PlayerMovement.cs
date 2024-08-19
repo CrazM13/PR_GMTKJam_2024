@@ -122,19 +122,32 @@ public partial class PlayerMovement : Node2D {
 			emmisionFrames = 0;
 		}
 
-		if (GameManager.AllowCheats) {
-			bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Equal);
-			if (isCheatKeyNowPressed && !isCheatkeyPressed) {
+		if (acceptInputs && GameManager.AllowCheats) {
+			bool isCheatAddMassKeyNowPressed = Input.IsKeyPressed(Key.Equal);
+			if (isCheatAddMassKeyNowPressed && !isCheatAddMassKeyPressed) {
 				AddMass(CurrentForm.Mass * GameManager.ConsumptionEfficiency);
 			}
-			isCheatkeyPressed = isCheatKeyNowPressed;
+			isCheatAddMassKeyPressed = isCheatAddMassKeyNowPressed;
+
+			if (Input.IsKeyPressed(Key.Minus)) {
+				ShakeCamera(5f, 100f);
+				PlayGravitySFX();
+
+				DebrisData currentFormData = CurrentForm;
+				if (GameManager.CurrentMass > currentFormData.Mass) {
+					GameManager.CurrentMass = Mathf.Max(GameManager.CurrentMass * (1 - GameManager.MassLossModifier), currentFormData.Mass);
+					EmitSignal(SignalName.OnMassChange);
+					TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+				}
+
+			}
 		}
 	}
-	private bool isCheatkeyPressed = false;
+	private bool isCheatAddMassKeyPressed = false;
 
 	public override void _PhysicsProcess(double delta) {
 
-		if (acceptInputs) {
+		if (!GameManager.IsGamePaused && acceptInputs) {
 
 			if (!GameManager.IsGamePaused) {
 				if (Input.IsActionPressed("time_sprint")) {

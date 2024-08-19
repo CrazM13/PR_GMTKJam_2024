@@ -3,6 +3,8 @@ using System;
 
 public partial class LevelName : Label {
 
+	[Export] private bool allowCheats = false;
+
 	private int greekLetters = 24;
 
 	int greekAlpha = 0x03B1;
@@ -28,7 +30,7 @@ public partial class LevelName : Label {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		if (GameManager.AllowCheats) {
+		if (allowCheats && GameManager.AllowCheats) {
 			bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Backslash);
 			if (isCheatKeyNowPressed && !isCheatkeyPressed) {
 				GameManager.Level++;

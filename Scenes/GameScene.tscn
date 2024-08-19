@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=62 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://cx4ow76o66ixx" path="res://Assets/Textures/Sprites/Red_Giant_A.png" id="17_8d0wg"]
 [ext_resource type="Texture2D" uid="uid://blrpeuey10v1l" path="res://Assets/Textures/Sprites/Blue_Supergiant_A.png" id="18_f1axw"]
 [ext_resource type="Texture2D" uid="uid://biitdr1nvnhwb" path="res://Assets/Textures/Sprites/Black_Hole_A.png" id="19_je8ls"]
+[ext_resource type="Script" path="res://Scripts/UI/LevelNameSplash.cs" id="24_637mw"]
 [ext_resource type="AudioStream" uid="uid://xn4i1nimorra" path="res://Assets/Audio/SFX/GravityWell.wav" id="30_atcdk"]
 [ext_resource type="AudioStream" uid="uid://dfyokyg52yuab" path="res://Assets/Audio/SFX/Wind.wav" id="32_pbld3"]
 
@@ -111,6 +112,11 @@ font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_3ui80"]
 outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wgv1f"]
+font_size = 96
+outline_size = 24
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qt5o"]
@@ -409,6 +415,24 @@ grow_vertical = 0
 theme = ExtResource("2_q2j3u")
 label_settings = SubResource("LabelSettings_3ui80")
 script = ExtResource("7_ovf2w")
+allowCheats = true
+
+[node name="Label2" type="Label" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_q2j3u")
+text = "Universe Name"
+label_settings = SubResource("LabelSettings_wgv1f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+script = ExtResource("24_637mw")
+typeoutSpeed = 1.0
+deleteSpeed = 3.0
+showDuration = 1.0
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 
