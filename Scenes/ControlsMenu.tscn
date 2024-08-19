@@ -1,0 +1,258 @@
+[gd_scene load_steps=14 format=3 uid="uid://jbcb0r6mnwsb"]
+
+[ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_r20hm"]
+[ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="2_u7lyo"]
+[ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="3_1n6gg"]
+[ext_resource type="Texture2D" uid="uid://cqoqhcfasyv2j" path="res://Assets/Textures/UI/Controls/WASD.png" id="4_d0mqi"]
+[ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="4_u0o41"]
+[ext_resource type="Texture2D" uid="uid://ch0mov0anjdkr" path="res://Assets/Textures/UI/Controls/CAMERA.png" id="5_b5i7j"]
+[ext_resource type="Texture2D" uid="uid://0kbrmwj6sc3j" path="res://Assets/Textures/UI/Controls/TIME.png" id="6_3c0rw"]
+[ext_resource type="Texture2D" uid="uid://cdv5yhnbks0iw" path="res://Assets/Textures/UI/Controls/PAUSE.png" id="7_8v5q2"]
+[ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="8_u84im"]
+[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="9_a8kqc"]
+[ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="10_e5vh3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5gk8d"]
+font_size = 148
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_by6kv"]
+font_size = 32
+
+[node name="CreditsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SceneBaseResources" parent="." instance=ExtResource("1_r20hm")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_u7lyo")
+speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_1n6gg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_5gk8d")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+columns = 2
+
+[node name="PanelContainer" type="Panel" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_d0mqi")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Movement"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "    WASD"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="Label3" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "    Arrow Keys"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="PanelContainer2" type="Panel" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer2/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_b5i7j")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer2/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Camera Zoom"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer2/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "    Q & E"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="Label3" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer2/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "    [ & ]"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="PanelContainer3" type="Panel" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer3/HBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_3c0rw")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer3/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer3/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Speed"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer3/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "    Shift - Sprint"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="Label3" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer3/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "    Ctrl - Slow"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="PanelContainer4" type="Panel" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer4/HBoxContainer4"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_8v5q2")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer4/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer4/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer4/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+text = "    Escape"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="Label3" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/GridContainer/PanelContainer4/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+text = "    P"
+label_settings = SubResource("LabelSettings_by6kv")
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Options" type="GridContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Play"
+icon = ExtResource("4_u0o41")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Back" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Back
+"
+icon = ExtResource("8_u84im")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_a8kqc")
+autoplay = true
+bus = &"Music"
+script = ExtResource("10_e5vh3")
+musicGroup = "menu"
+
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/MainMenu.tscn"]]
+
+[editable path="SceneBaseResources"]

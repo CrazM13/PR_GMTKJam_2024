@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://1tt6ywmkt6xs"]
+[gd_scene load_steps=12 format=3 uid="uid://1tt6ywmkt6xs"]
 
 [ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="1_ihgnj"]
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_j7lwx"]
 [ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="3_8o5h3"]
+[ext_resource type="Texture2D" uid="uid://blederf82rpji" path="res://Assets/Textures/UI/logo.png" id="4_5u2p1"]
 [ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="4_pymae"]
 [ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="5_wn4wx"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
@@ -75,13 +76,13 @@ icon = ExtResource("4_pymae")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Credits" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
+[node name="Controls" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Credits"
+text = "Controls"
 icon = ExtResource("5_wn4wx")
 icon_alignment = 1
 expand_icon = true
@@ -97,6 +98,41 @@ icon = ExtResource("6_ps1w5")
 icon_alignment = 1
 expand_icon = true
 
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Credits2" type="Button" parent="CanvasLayer"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_ihgnj")
+icon = ExtResource("4_5u2p1")
+icon_alignment = 1
+expand_icon = true
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3diu3")
 autoplay = true
@@ -106,7 +142,8 @@ musicGroup = "menu"
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Options" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/OptionsMenu.tscn"]]
-[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Credits" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/CreditsMenu.tscn"]]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Controls" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/ControlsMenu.tscn"]]
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Quit" to="SceneBaseResources/SceneTransition" method="Quit"]
+[connection signal="pressed" from="CanvasLayer/Credits2" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/CreditsMenu.tscn"]]
 
 [editable path="SceneBaseResources"]
