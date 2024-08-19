@@ -27,4 +27,6 @@ public static class GameManager {
 	public static float ConsumptionEfficiency = 0.25f;
 	public static float MassLossModifier = 0.01f;
 
+	public static int Level = 1;
+
 }

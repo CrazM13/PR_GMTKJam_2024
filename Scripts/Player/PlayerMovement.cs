@@ -124,15 +124,7 @@ public partial class PlayerMovement : Node2D {
 		if (GameManager.AllowCheats) {
 			bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Equal);
 			if (isCheatKeyNowPressed && !isCheatkeyPressed) {
-				GameManager.CurrentMass += CurrentForm.Mass * GameManager.ConsumptionEfficiency;
-				EmitSignal(SignalName.OnMassChange);
-
-				DebrisData nextForm = NextForm;
-				if (nextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
-					LevelUp();
-				} else {
-					TargetScale = GameManager.CurrentMass / GameManager.GameScale;
-				}
+				AddMass(CurrentForm.Mass * GameManager.ConsumptionEfficiency);
 			}
 			isCheatkeyPressed = isCheatKeyNowPressed;
 		}
@@ -219,18 +211,7 @@ public partial class PlayerMovement : Node2D {
 		float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range * TargetScale) * GameManager.ConsumptionEfficiency;
 		if (consumedMass > 0) {
 			ShakeCamera(100, 100);
-			GameManager.CurrentMass += consumedMass;
-			EmitSignal(SignalName.OnMassChange);
-
-			if (NextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
-				LevelUp();
-			} else {
-				TargetScale = GameManager.CurrentMass / GameManager.GameScale;
-
-				if (currentFormIndex == playerForms.Length - 1 && TargetScale > 1.1f) {
-					Win();
-				}
-			}
+			AddMass(consumedMass);
 		}
 
 		Node2D collider = DebrisManager.Instance.CheckCollision(this, Range);
@@ -257,6 +238,7 @@ public partial class PlayerMovement : Node2D {
 
 		GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0] + "A").Mass;
 		GameManager.GameScale = GameManager.CurrentMass;
+		GameManager.Level++;
 	}
 
 	public override void _Draw() {
@@ -264,5 +246,20 @@ public partial class PlayerMovement : Node2D {
 
 		if (GameManager.DisplayHitboxSetting > 0) DrawCircle(Vector2.Zero, GameManager.DefaultReachDistance, new Color(0.7f, 0.7f, 1f, 0.25f));
 		if (GameManager.DisplayHitboxSetting > 1) DrawCircle(Vector2.Zero, GameManager.DefaultReachDistance * 4, new Color(0.7f, 0.7f, 1f, 0.125f));
+	}
+
+	private void AddMass(float mass) {
+		GameManager.CurrentMass += mass;
+		EmitSignal(SignalName.OnMassChange);
+
+		if (NextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
+			LevelUp();
+		} else {
+			TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+
+			if (currentFormIndex == playerForms.Length - 1 && TargetScale > 1.1f) {
+				Win();
+			}
+		}
 	}
 }

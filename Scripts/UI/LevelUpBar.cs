@@ -51,16 +51,10 @@ public partial class LevelUpBar : ProgressBar {
 
 		if (currentFormData != null) {
 			beforeImage.Texture = ResourceLoader.Load<Texture2D>(currentFormData.TexturePath);
-			beforeImage.Visible = true;
-		} else {
-			beforeImage.Visible = false;
 		}
 
 		if (nextFormData != null) {
 			afterImage.Texture = ResourceLoader.Load<Texture2D>(nextFormData.TexturePath);
-			afterImage.Visible = true;
-		} else {
-			afterImage.Visible = false;
 		}
 
 		title.Text = formNames[player.GetFormIndex];

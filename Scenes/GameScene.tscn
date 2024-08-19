@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=58 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -9,17 +9,32 @@
 [ext_resource type="Texture2D" uid="uid://cfw2f6n1rm54i" path="res://Assets/Textures/Sprites/Alpha Particle.png" id="4_lc7c3"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisRotation.cs" id="5_h2ipd"]
 [ext_resource type="Script" path="res://Scripts/Debris/DebrisSpawner.cs" id="6_4acm6"]
+[ext_resource type="Script" path="res://Scripts/UI/UnlockProgress.cs" id="6_3717i"]
+[ext_resource type="Shader" uid="uid://csmuwesiqvs8h" path="res://Assets/Shaders/Unlockable.tres" id="6_eiyto"]
 [ext_resource type="Script" path="res://Scripts/UI/UIZoomLevel.cs" id="6_f6sk2"]
+[ext_resource type="Texture2D" uid="uid://bh33k3unrw2nu" path="res://Assets/Textures/Sprites/Grain of Sand.png" id="6_ssyyf"]
 [ext_resource type="AudioStream" uid="uid://bdhbe62fdhtyo" path="res://Assets/Audio/SFX/Breaking.wav" id="6_w2boq"]
 [ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="7_eu5w8"]
+[ext_resource type="Script" path="res://Scripts/UI/LevelName.cs" id="7_ovf2w"]
+[ext_resource type="Texture2D" uid="uid://bg3l6t2gckuoa" path="res://Assets/Textures/Sprites/Stone.png" id="7_pj5bo"]
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenu.cs" id="7_u2513"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="8_76oqu"]
+[ext_resource type="Texture2D" uid="uid://mqam4ab4vufl" path="res://Assets/Textures/Sprites/Boulder.png" id="8_f5ohb"]
 [ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
+[ext_resource type="Texture2D" uid="uid://c45u1bjpdfc3j" path="res://Assets/Textures/Sprites/Space Debris.png" id="9_gdv3d"]
+[ext_resource type="Texture2D" uid="uid://x7s60ex24flk" path="res://Assets/Textures/Sprites/Meteoroid.png" id="10_dtxmc"]
+[ext_resource type="Texture2D" uid="uid://6u1dwa1tx60j" path="res://Assets/Textures/Sprites/Planetoid.png" id="11_l6ao6"]
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
+[ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="14_ttxeq"]
 [ext_resource type="Shader" uid="uid://c5prg8upj7oxh" path="res://Assets/Shaders/Rainbow.tres" id="15_3bthc"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
+[ext_resource type="Texture2D" uid="uid://dkggnqkxmegxa" path="res://Assets/Textures/Sprites/Red_Dwarf_A.png" id="15_sm0ej"]
 [ext_resource type="Script" path="res://Scripts/Player/Trail.cs" id="15_vromc"]
+[ext_resource type="Texture2D" uid="uid://bndngujfemag8" path="res://Assets/Textures/Sprites/G_Type_A.png" id="16_din1s"]
 [ext_resource type="AudioStream" uid="uid://bmfjsi6clx6x1" path="res://Assets/Audio/Music/Distorted.wav" id="17_5v7c8"]
+[ext_resource type="Texture2D" uid="uid://cx4ow76o66ixx" path="res://Assets/Textures/Sprites/Red_Giant_A.png" id="17_8d0wg"]
+[ext_resource type="Texture2D" uid="uid://blrpeuey10v1l" path="res://Assets/Textures/Sprites/Blue_Supergiant_A.png" id="18_f1axw"]
+[ext_resource type="Texture2D" uid="uid://biitdr1nvnhwb" path="res://Assets/Textures/Sprites/Black_Hole_A.png" id="19_je8ls"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
@@ -29,8 +44,72 @@ font_size = 32
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5oihx"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u1ww7"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ui5jk"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ip1gj"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4o50"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ngas"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgmh6"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nmqf"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xuby5"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cw718"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kawxs"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qvld"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7n8dm"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_haunx"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orr3t"]
+shader = ExtResource("6_eiyto")
+shader_parameter/IsUnlocked = false
+
 [sub_resource type="LabelSettings" id="LabelSettings_al10n"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ui80"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qt5o"]
 shader = ExtResource("15_3bthc")
@@ -60,21 +139,28 @@ anchor_right = 1.0
 grow_horizontal = 2
 theme = ExtResource("2_q2j3u")
 
-[node name="Timer" type="Label" parent="HUD/Panel"]
+[node name="Control" type="Control" parent="HUD/Panel"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = -14.0
-offset_bottom = 14.0
+offset_left = -256.0
+offset_bottom = 28.0
 grow_horizontal = 0
+
+[node name="Timer" type="Label" parent="HUD/Panel/Control"]
+custom_minimum_size = Vector2(256, 0)
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 text = "Time:"
 label_settings = SubResource("LabelSettings_mi75w")
+horizontal_alignment = 2
 script = ExtResource("3_32873")
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD/Panel"]
@@ -129,6 +215,150 @@ label_settings = SubResource("LabelSettings_p0k46")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="StagesProcess" type="Panel" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" node_paths=PackedStringArray("player", "unlocks")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_3717i")
+player = NodePath("../../../../../../Player")
+unlocks = [NodePath("HBoxContainer/S0"), NodePath("HBoxContainer/S1"), NodePath("HBoxContainer/S2"), NodePath("HBoxContainer/S3"), NodePath("HBoxContainer/S4"), NodePath("HBoxContainer/S5"), NodePath("HBoxContainer/S6"), NodePath("HBoxContainer/S7"), NodePath("HBoxContainer/S8"), NodePath("HBoxContainer/S9"), NodePath("HBoxContainer/S10"), NodePath("HBoxContainer/S11"), NodePath("HBoxContainer/S12"), NodePath("HBoxContainer/S13"), NodePath("HBoxContainer/S14")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="S0" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_5oihx")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_lc7c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S1" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_u1ww7")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_ssyyf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S2" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_ui5jk")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_pj5bo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S3" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_ip1gj")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_f5ohb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S4" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_t4o50")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("9_gdv3d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S5" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_8ngas")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("10_dtxmc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S6" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_sgmh6")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_l6ao6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S7" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_8nmqf")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("7_eu5w8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S8" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_xuby5")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_76oqu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S9" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_cw718")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("14_ttxeq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S10" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_kawxs")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("15_sm0ej")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S11" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_7qvld")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("16_din1s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S12" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_7n8dm")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("17_8d0wg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S13" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_haunx")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("18_f1axw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S14" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess/HBoxContainer"]
+material = SubResource("ShaderMaterial_orr3t")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("19_je8ls")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="TextureRect2" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_lc7c3")
@@ -166,6 +396,17 @@ clip_text = true
 script = ExtResource("6_f6sk2")
 player = NodePath("../../../../Player")
 zoomSpeed = 10.0
+
+[node name="Label" type="Label" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+theme = ExtResource("2_q2j3u")
+label_settings = SubResource("LabelSettings_3ui80")
+script = ExtResource("7_ovf2w")
 
 [node name="Pause Menu" type="CanvasLayer" parent="."]
 
@@ -317,6 +558,7 @@ musicGroup = "game"
 [connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="Pause Menu/PauseMenu" method="HideMenu"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/Zoom/Zoom2" method="OnLevelUp"]
+[connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess" method="OnLevelUp"]
 [connection signal="OnMassChange" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnMassChange"]
 [connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]
 
