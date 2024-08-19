@@ -29,6 +29,8 @@ public partial class DebrisNode : Node2D {
 
 	private ShakeConfig shakeConfig;
 
+	private float volumeDB;
+
 	public override void _Ready() {
 		base._Ready();
 
@@ -37,6 +39,8 @@ public partial class DebrisNode : Node2D {
 		shakeConfig.OnReset += () => {
 			sfx.Stop();
 		};
+
+		volumeDB = sfx.VolumeDb;
 
 		Scale = new Vector2(0, 0);
 		float heading = (float) GD.RandRange(-Mathf.Pi, Mathf.Pi);
@@ -70,7 +74,7 @@ public partial class DebrisNode : Node2D {
 	public void Shake(float strength, float intensity = 1) {
 		shakeConfig.Shake(strength, intensity);
 		if (!sfx.Playing) {
-			sfx.VolumeDb = Mathf.LinearToDb(TargetScale * Mathf.DbToLinear(sfx.VolumeDb));
+			sfx.VolumeDb = Mathf.LinearToDb(TargetScale * Mathf.DbToLinear(volumeDB));
 			sfx.Play();
 		}
 	}

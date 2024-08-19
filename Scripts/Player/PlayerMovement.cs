@@ -239,6 +239,8 @@ public partial class PlayerMovement : Node2D {
 
 			GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0] + "A").Mass;
 			GameManager.GameScale = GameManager.CurrentMass;
+			GameManager.IsGamePaused = true;
+			Engine.TimeScale = 1;
 
 			GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
 		}

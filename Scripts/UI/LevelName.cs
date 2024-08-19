@@ -5,7 +5,32 @@ public partial class LevelName : Label {
 
 	[Export] private bool allowCheats = false;
 
-	private int greekLetters = 24;
+	private string[] greekLetters = {
+		"alpha",
+		"beta",
+		"gamma",
+		"delta",
+		"epsilon",
+		"zeta",
+		"eta",
+		"theta",
+		"iota",
+		"kappa",
+		"lambda",
+		"mu",
+		"nu",
+		"xi",
+		"omicron",
+		"pi",
+		"rho",
+		"sigma",
+		"tau",
+		"upsilon",
+		"phi",
+		"chi",
+		"psi",
+		"omega"
+	};
 
 	int greekAlpha = 0x03B1;
 
@@ -43,16 +68,16 @@ public partial class LevelName : Label {
 
 	private string GetLevelName(int level) {
 
-		if (level < greekLetters * 2) {
-			string greek = $"{(char) (greekAlpha + ((level - 1) % greekLetters))}";
-			bool isPrime = level >= greekLetters;
+		if (level <= greekLetters.Length * 2) {
+			string greek = $"{greekLetters[(level - 1) % greekLetters.Length]}";
+			bool isPrime = level > greekLetters.Length;
 
-			if (GameManager.Seed <= 0.1f && greek == $"{(char) 0x03C0}") {
+			if (GameManager.Seed <= 0.1f && greek == "pi") {
 				greek = pieFlavours[Mathf.RoundToInt(GameManager.Seed * 1000) % pieFlavours.Length];
 				greek += " Pie";
 			}
 
-			return $"Universe {greek}{(isPrime ? "`" : "")}";
+			return $"Universe {greek}{(isPrime ? " PRIME" : "")}";
 		}
 
 		return universePrefix[level % universePrefix.Length] + universeSuffix[level % universeSuffix.Length];

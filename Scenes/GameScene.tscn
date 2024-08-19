@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=65 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -37,6 +37,8 @@
 [ext_resource type="Texture2D" uid="uid://db5sbntipf1vw" path="res://Assets/Textures/Sprites/Black_Hole_B.png" id="21_uaamn"]
 [ext_resource type="Script" path="res://Scripts/UI/LevelNameSplash.cs" id="24_637mw"]
 [ext_resource type="AudioStream" uid="uid://xn4i1nimorra" path="res://Assets/Audio/SFX/GravityWell.wav" id="30_atcdk"]
+[ext_resource type="Texture2D" uid="uid://by1y1alo4f2p7" path="res://Assets/Textures/Sprites/Ability/GravityEffect.png" id="30_t7nex"]
+[ext_resource type="Script" path="res://Scripts/Player/AbilityGravityWell.cs" id="30_yy3yd"]
 [ext_resource type="AudioStream" uid="uid://dfyokyg52yuab" path="res://Assets/Audio/SFX/Wind.wav" id="32_pbld3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
@@ -118,6 +120,9 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 96
 outline_size = 24
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cnt5e"]
+light_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qt5o"]
 shader = ExtResource("15_3bthc")
@@ -525,12 +530,17 @@ texture_filter = 1
 texture = ExtResource("4_lc7c3")
 script = ExtResource("5_h2ipd")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+[node name="RemoteCamera" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 update_scale = false
 
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
+[node name="RemoteArrow" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../ArrowHelper")
+update_rotation = false
+update_scale = false
+
+[node name="RemoteAbility" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../GravityAbility")
 update_rotation = false
 update_scale = false
 
@@ -543,6 +553,22 @@ bus = &"SFX"
 stream = ExtResource("30_atcdk")
 pitch_scale = 0.25
 bus = &"SFX"
+
+[node name="GravityAbility" type="Node2D" parent="."]
+position = Vector2(577, 326)
+script = ExtResource("30_yy3yd")
+power = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="GravityAbility"]
+modulate = Color(1, 1, 1, 0.25098)
+z_index = -75
+z_as_relative = false
+texture_filter = 2
+texture_repeat = 1
+material = SubResource("CanvasItemMaterial_cnt5e")
+texture = ExtResource("30_t7nex")
+script = ExtResource("5_h2ipd")
+speed = 2.0
 
 [node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("target", "trailSFX")]
 z_index = -50
@@ -558,7 +584,7 @@ end_cap_mode = 2
 script = ExtResource("15_vromc")
 target = NodePath("../Player")
 maxPositions = 20
-minDistance = 2.0
+minDistance = 5.0
 trailSFX = NodePath("AudioStreamPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Line2D"]

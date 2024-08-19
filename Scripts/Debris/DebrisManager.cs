@@ -235,4 +235,18 @@ public class DebrisManager {
 		return nearestDebris;
 	}
 
+	public List<DebrisNode> GetNearbyDebris(Vector2 position, float maxDistance) {
+
+		List<DebrisNode> nearbyNodes = new List<DebrisNode>();
+
+		foreach (KeyValuePair<uint, DebrisNode> debris in activeDebris) {
+			float distance = position.DistanceSquaredTo(debris.Value.GlobalPosition);
+			if (distance < maxDistance * maxDistance) {
+				nearbyNodes.Add(debris.Value);
+			}
+		}
+
+		return nearbyNodes;
+	}
+
 }
