@@ -26,4 +26,10 @@ public class DebrisData {
 		return this;
 	}
 
+	public DebrisData AddPassiveParticles() {
+		this.PassiveParticleColours = ParticleColours;
+
+		return this;
+	}
+
 }
