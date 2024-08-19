@@ -598,6 +598,8 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("2_8oanl")
+minZoom = 0.5
+maxZoom = 1.5
 
 [node name="DebrisTimer" type="Timer" parent="." node_paths=PackedStringArray("camera")]
 wait_time = 0.25
