@@ -21,4 +21,5 @@ script = ExtResource("3_y26h7")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sprite2D"]
 stream = ExtResource("4_idnh1")
 volume_db = -2.0
+pitch_scale = 0.5
 bus = &"SFX"

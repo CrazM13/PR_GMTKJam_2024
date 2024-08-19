@@ -22,19 +22,19 @@
 [ext_resource type="Texture2D" uid="uid://mqam4ab4vufl" path="res://Assets/Textures/Sprites/Boulder.png" id="8_f5ohb"]
 [ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
 [ext_resource type="Texture2D" uid="uid://c45u1bjpdfc3j" path="res://Assets/Textures/Sprites/Space Debris.png" id="9_gdv3d"]
-[ext_resource type="Texture2D" uid="uid://x7s60ex24flk" path="res://Assets/Textures/Sprites/Meteoroid.png" id="10_dtxmc"]
 [ext_resource type="Texture2D" uid="uid://6u1dwa1tx60j" path="res://Assets/Textures/Sprites/Planetoid.png" id="11_l6ao6"]
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
-[ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="14_ttxeq"]
+[ext_resource type="Texture2D" uid="uid://bvf5pfpsgoaq0" path="res://Assets/Textures/Sprites/meteorite_c.png" id="12_rc5fo"]
 [ext_resource type="Shader" uid="uid://c5prg8upj7oxh" path="res://Assets/Shaders/Rainbow.tres" id="15_3bthc"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
-[ext_resource type="Texture2D" uid="uid://dkggnqkxmegxa" path="res://Assets/Textures/Sprites/Red_Dwarf_A.png" id="15_sm0ej"]
 [ext_resource type="Script" path="res://Scripts/Player/Trail.cs" id="15_vromc"]
-[ext_resource type="Texture2D" uid="uid://bndngujfemag8" path="res://Assets/Textures/Sprites/G_Type_A.png" id="16_din1s"]
+[ext_resource type="Texture2D" uid="uid://dbqvxdgudtvss" path="res://Assets/Textures/Sprites/Gas_Giant_B.png" id="16_sdty4"]
 [ext_resource type="AudioStream" uid="uid://bmfjsi6clx6x1" path="res://Assets/Audio/Music/Distorted.wav" id="17_5v7c8"]
-[ext_resource type="Texture2D" uid="uid://cx4ow76o66ixx" path="res://Assets/Textures/Sprites/Red_Giant_A.png" id="17_8d0wg"]
-[ext_resource type="Texture2D" uid="uid://blrpeuey10v1l" path="res://Assets/Textures/Sprites/Blue_Supergiant_A.png" id="18_f1axw"]
-[ext_resource type="Texture2D" uid="uid://biitdr1nvnhwb" path="res://Assets/Textures/Sprites/Black_Hole_A.png" id="19_je8ls"]
+[ext_resource type="Texture2D" uid="uid://yrn557gerf6j" path="res://Assets/Textures/Sprites/Red_Dwarf_B.png" id="17_o2qju"]
+[ext_resource type="Texture2D" uid="uid://dufhc04tmltyk" path="res://Assets/Textures/Sprites/g_type_c.png" id="18_uars0"]
+[ext_resource type="Texture2D" uid="uid://bgb3hfigyee4k" path="res://Assets/Textures/Sprites/Red_Giant_B.png" id="19_31b7g"]
+[ext_resource type="Texture2D" uid="uid://ifp0pg7vva4q" path="res://Assets/Textures/Sprites/Red_Supergiant_B.png" id="20_lxydp"]
+[ext_resource type="Texture2D" uid="uid://db5sbntipf1vw" path="res://Assets/Textures/Sprites/Black_Hole_B.png" id="21_uaamn"]
 [ext_resource type="Script" path="res://Scripts/UI/LevelNameSplash.cs" id="24_637mw"]
 [ext_resource type="AudioStream" uid="uid://xn4i1nimorra" path="res://Assets/Audio/SFX/GravityWell.wav" id="30_atcdk"]
 [ext_resource type="AudioStream" uid="uid://dfyokyg52yuab" path="res://Assets/Audio/SFX/Wind.wav" id="32_pbld3"]
@@ -291,7 +291,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_8ngas")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_dtxmc")
+texture = ExtResource("12_rc5fo")
 expand_mode = 1
 stretch_mode = 5
 
@@ -323,7 +323,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_cw718")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("14_ttxeq")
+texture = ExtResource("16_sdty4")
 expand_mode = 1
 stretch_mode = 5
 
@@ -331,7 +331,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_kawxs")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("15_sm0ej")
+texture = ExtResource("17_o2qju")
 expand_mode = 1
 stretch_mode = 5
 
@@ -339,7 +339,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_7qvld")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("16_din1s")
+texture = ExtResource("18_uars0")
 expand_mode = 1
 stretch_mode = 5
 
@@ -347,7 +347,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_7n8dm")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("17_8d0wg")
+texture = ExtResource("19_31b7g")
 expand_mode = 1
 stretch_mode = 5
 
@@ -355,7 +355,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_haunx")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("18_f1axw")
+texture = ExtResource("20_lxydp")
 expand_mode = 1
 stretch_mode = 5
 
@@ -363,7 +363,7 @@ stretch_mode = 5
 material = SubResource("ShaderMaterial_orr3t")
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("19_je8ls")
+texture = ExtResource("21_uaamn")
 expand_mode = 1
 stretch_mode = 5
 
@@ -541,7 +541,7 @@ bus = &"SFX"
 
 [node name="GravityWellSFX" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("30_atcdk")
-pitch_scale = 0.5
+pitch_scale = 0.25
 bus = &"SFX"
 
 [node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("target", "trailSFX")]

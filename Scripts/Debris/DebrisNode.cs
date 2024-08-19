@@ -69,7 +69,10 @@ public partial class DebrisNode : Node2D {
 
 	public void Shake(float strength, float intensity = 1) {
 		shakeConfig.Shake(strength, intensity);
-		if (!sfx.Playing) sfx.Play();
+		if (!sfx.Playing) {
+			sfx.VolumeDb = Mathf.LinearToDb(TargetScale * Mathf.DbToLinear(sfx.VolumeDb));
+			sfx.Play();
+		}
 	}
 
 	public void SetDebrisType(DebrisData data) {
