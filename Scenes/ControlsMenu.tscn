@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jbcb0r6mnwsb"]
+[gd_scene load_steps=15 format=3 uid="uid://jbcb0r6mnwsb"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_r20hm"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="2_u7lyo"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cdv5yhnbks0iw" path="res://Assets/Textures/UI/Controls/PAUSE.png" id="7_8v5q2"]
 [ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="8_u84im"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="9_a8kqc"]
+[ext_resource type="Script" path="res://Scripts/UI/ButtonEffects.cs" id="9_clxas"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="10_e5vh3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5gk8d"]
@@ -232,6 +233,7 @@ text = "Play"
 icon = ExtResource("4_u0o41")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("9_clxas")
 
 [node name="Back" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
 texture_filter = 1
@@ -244,6 +246,7 @@ text = "Back
 icon = ExtResource("8_u84im")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("9_clxas")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_a8kqc")

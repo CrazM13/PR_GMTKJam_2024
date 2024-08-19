@@ -11,7 +11,7 @@ public partial class PersistantMusic : AudioStreamPlayer {
 	public override void _Ready() {
 		base._Ready();
 
-		if (musicGroup == currentGroup) this.Seek(playbackPosition);
+		if (musicGroup == currentGroup) this.Play(playbackPosition);
 		else currentGroup = musicGroup;
 
 		this.Finished += OnMusicFinish;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=66 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://ifp0pg7vva4q" path="res://Assets/Textures/Sprites/Red_Supergiant_B.png" id="20_lxydp"]
 [ext_resource type="Texture2D" uid="uid://db5sbntipf1vw" path="res://Assets/Textures/Sprites/Black_Hole_B.png" id="21_uaamn"]
 [ext_resource type="Script" path="res://Scripts/UI/LevelNameSplash.cs" id="24_637mw"]
+[ext_resource type="Script" path="res://Scripts/UI/ButtonEffects.cs" id="26_cx2b3"]
 [ext_resource type="AudioStream" uid="uid://xn4i1nimorra" path="res://Assets/Audio/SFX/GravityWell.wav" id="30_atcdk"]
 [ext_resource type="Texture2D" uid="uid://by1y1alo4f2p7" path="res://Assets/Textures/Sprites/Ability/GravityEffect.png" id="30_t7nex"]
 [ext_resource type="Script" path="res://Scripts/Player/AbilityGravityWell.cs" id="30_yy3yd"]
@@ -482,6 +483,7 @@ text = "Resume"
 icon = ExtResource("4_lc7c3")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("26_cx2b3")
 
 [node name="Options" type="Button" parent="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer"]
 texture_filter = 1
@@ -493,6 +495,7 @@ text = "Options"
 icon = ExtResource("7_eu5w8")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("26_cx2b3")
 
 [node name="Quit" type="Button" parent="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer"]
 texture_filter = 1
@@ -504,6 +507,7 @@ text = "Quit"
 icon = ExtResource("8_76oqu")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("26_cx2b3")
 
 [node name="ArrowHelper" type="Node2D" parent="." node_paths=PackedStringArray("arrowSprite")]
 position = Vector2(577, 326)

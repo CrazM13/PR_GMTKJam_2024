@@ -1,17 +1,32 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://c4rluknvcil5d"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://c4rluknvcil5d"]
 
 [ext_resource type="FontFile" uid="uid://cuhrcs35ldyej" path="res://Assets/Fonts/Silkscreen/slkscr.ttf" id="1_d1bva"]
 [ext_resource type="Texture2D" uid="uid://jtl5jnrd722s" path="res://Assets/Textures/UI/9SliceOutline.png" id="2_m7pxu"]
+[ext_resource type="StyleBox" uid="uid://udqbpa70ch0v" path="res://Assets/Themes/ThemeComponents/HoverButtonTexture.tres" id="2_ylipb"]
+[ext_resource type="StyleBox" uid="uid://vnrtwymu1enb" path="res://Assets/Themes/ThemeComponents/PanelTexture.tres" id="3_hca0t"]
 [ext_resource type="FontFile" uid="uid://b4jcyukd6iqvh" path="res://Assets/Fonts/Silkscreen/slkscreb.ttf" id="3_rpn5f"]
 [ext_resource type="Texture2D" uid="uid://dleaixdso3lep" path="res://Assets/Textures/UI/Progress.png" id="4_6y7dg"]
+[ext_resource type="StyleBox" uid="uid://cie0f8r4cor3d" path="res://Assets/Themes/ThemeComponents/PressedButtonTexture.tres" id="4_aojw8"]
+[ext_resource type="Texture2D" uid="uid://bv384rwno4ndg" path="res://Assets/Textures/UI/UIGrabber.png" id="6_fultf"]
+[ext_resource type="Texture2D" uid="uid://dp2iiuib0630m" path="res://Assets/Textures/UI/Mini9Slice.png" id="7_n8nrj"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0fxr"]
-texture = ExtResource("2_m7pxu")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
-draw_center = false
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fsxri"]
+texture = ExtResource("7_n8nrj")
+texture_margin_left = 3.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+axis_stretch_horizontal = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_57fwu"]
+texture = ExtResource("7_n8nrj")
+texture_margin_left = 3.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nq70y"]
 texture = ExtResource("2_m7pxu")
@@ -45,22 +60,40 @@ Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 16
 Button/font_sizes/font_size = 48
 Button/fonts/font = ExtResource("1_d1bva")
-Button/styles/normal = SubResource("StyleBoxTexture_x0fxr")
+Button/styles/hover = ExtResource("2_ylipb")
+Button/styles/normal = ExtResource("3_hca0t")
+Button/styles/pressed = ExtResource("4_aojw8")
 Fonts/fonts/large = ExtResource("3_rpn5f")
 Fonts/fonts/normal = ExtResource("1_d1bva")
+HSlider/icons/grabber = ExtResource("6_fultf")
+HSlider/icons/grabber_highlight = ExtResource("6_fultf")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_fsxri")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_fsxri")
+HSlider/styles/slider = SubResource("StyleBoxTexture_57fwu")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 16
 Label/font_sizes/font_size = 48
 Label/fonts/font = ExtResource("1_d1bva")
 OptionButton/font_sizes/font_size = 32
+OptionButton/styles/hover = ExtResource("2_ylipb")
+OptionButton/styles/normal = ExtResource("3_hca0t")
+OptionButton/styles/pressed = ExtResource("4_aojw8")
 Panel/styles/panel = SubResource("StyleBoxTexture_nq70y")
 PopupMenu/fonts/font = ExtResource("1_d1bva")
+PopupMenu/styles/hover = ExtResource("2_ylipb")
+PopupMenu/styles/panel = ExtResource("3_hca0t")
 ProgressBar/font_sizes/font_size = 24
 ProgressBar/fonts/font = ExtResource("1_d1bva")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_2ifcx")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_mypfg")
+TabBar/styles/tab_hovered = ExtResource("2_ylipb")
+TabBar/styles/tab_selected = ExtResource("4_aojw8")
+TabBar/styles/tab_unselected = ExtResource("3_hca0t")
 TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
 TabContainer/constants/outline_size = 8
 TabContainer/font_sizes/font_size = 24
 TabContainer/fonts/font = ExtResource("1_d1bva")
 TabContainer/styles/panel = SubResource("StyleBoxTexture_pt6ii")
+TabContainer/styles/tab_hovered = ExtResource("2_ylipb")
+TabContainer/styles/tab_selected = ExtResource("4_aojw8")
+TabContainer/styles/tab_unselected = ExtResource("3_hca0t")

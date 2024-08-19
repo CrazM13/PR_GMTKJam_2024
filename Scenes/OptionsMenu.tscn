@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://uhfaocn1pxkb"]
+[gd_scene load_steps=18 format=3 uid="uid://uhfaocn1pxkb"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_8s7y2"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="2_ylo7d"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/Options/CheatOption.cs" id="8_8ywnu"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/DifficultyOption.cs" id="9_i012u"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="11_uuvv6"]
+[ext_resource type="Script" path="res://Scripts/UI/ButtonEffects.cs" id="12_ocgeh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d57ki"]
 font_size = 148
@@ -292,6 +293,7 @@ text = "Play"
 icon = ExtResource("4_6bn1o")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("12_ocgeh")
 
 [node name="Back" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/Options"]
 texture_filter = 1
@@ -303,6 +305,7 @@ text = "Back"
 icon = ExtResource("5_31vkf")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("12_ocgeh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_wrpeo")
