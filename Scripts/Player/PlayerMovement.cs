@@ -239,7 +239,7 @@ public partial class PlayerMovement : Node2D {
 			PlayBreakingSFX();
 			acceptInputs = false;
 			Visible = false;
-			CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 10, 1, CurrentForm.ParticleColours, collider);
+			CustomParticles.Instance.SpawnParticles(GlobalPosition, 100, 150, 1, CurrentForm.ParticleColours, collider);
 			DebrisManager.Instance.ClearActiveDebris();
 
 			GameManager.CurrentMass = DebrisManager.Instance.GetDebrisType(playerForms[0] + "A").Mass;

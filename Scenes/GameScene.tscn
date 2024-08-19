@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=27 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="8_76oqu"]
 [ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
+[ext_resource type="Shader" uid="uid://c5prg8upj7oxh" path="res://Assets/Shaders/Rainbow.tres" id="15_3bthc"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
 [ext_resource type="Script" path="res://Scripts/Player/Trail.cs" id="15_vromc"]
 [ext_resource type="AudioStream" uid="uid://bmfjsi6clx6x1" path="res://Assets/Audio/Music/Distorted.wav" id="17_5v7c8"]
@@ -23,20 +24,27 @@
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
 
+[sub_resource type="LabelSettings" id="LabelSettings_p0k46"]
+font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_al10n"]
 font_size = 24
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oai60"]
-blend_mode = 4
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qt5o"]
+shader = ExtResource("15_3bthc")
+shader_parameter/Noise = 0.003
+shader_parameter/TextureScale = 4.0
+shader_parameter/ScrollTime = 1.0
 
 [sub_resource type="Curve" id="Curve_x2ubv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747368, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_7yw8k"]
-offsets = PackedFloat32Array(0, 0.14, 0.25, 0.38, 0.5, 0.62, 0.75, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_un51j"]
+offsets = PackedFloat32Array(0, 0.253333, 0.46, 0.666667, 0.86, 1)
+colors = PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1)
 
 [node name="GameScene" type="Node2D"]
 
@@ -86,7 +94,7 @@ texture = ExtResource("4_lc7c3")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD/Panel/CenterContainer/HBoxContainer" node_paths=PackedStringArray("player", "beforeImage", "afterImage")]
+[node name="ProgressBar" type="ProgressBar" parent="HUD/Panel/CenterContainer/HBoxContainer" node_paths=PackedStringArray("player", "beforeImage", "afterImage", "title")]
 custom_minimum_size = Vector2(512, 28)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -98,6 +106,7 @@ script = ExtResource("4_6gmew")
 player = NodePath("../../../../../Player")
 beforeImage = NodePath("../TextureRect")
 afterImage = NodePath("../TextureRect2")
+title = NodePath("Label")
 fillSpeed = 2.0
 
 [node name="Panel" type="Panel" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar"]
@@ -107,6 +116,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TEST"
+label_settings = SubResource("LabelSettings_p0k46")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="HUD/Panel/CenterContainer/HBoxContainer"]
 layout_mode = 2
@@ -253,11 +274,12 @@ bus = &"SFX"
 [node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("target")]
 z_index = -50
 z_as_relative = false
-material = SubResource("CanvasItemMaterial_oai60")
+material = SubResource("ShaderMaterial_0qt5o")
 width = 128.0
 width_curve = SubResource("Curve_x2ubv")
 default_color = Color(1, 1, 0.898039, 1)
-gradient = SubResource("Gradient_7yw8k")
+gradient = SubResource("Gradient_un51j")
+texture_mode = 2
 joint_mode = 2
 end_cap_mode = 2
 script = ExtResource("15_vromc")
