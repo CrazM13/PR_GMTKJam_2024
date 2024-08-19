@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=60 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -35,6 +35,8 @@
 [ext_resource type="Texture2D" uid="uid://cx4ow76o66ixx" path="res://Assets/Textures/Sprites/Red_Giant_A.png" id="17_8d0wg"]
 [ext_resource type="Texture2D" uid="uid://blrpeuey10v1l" path="res://Assets/Textures/Sprites/Blue_Supergiant_A.png" id="18_f1axw"]
 [ext_resource type="Texture2D" uid="uid://biitdr1nvnhwb" path="res://Assets/Textures/Sprites/Black_Hole_A.png" id="19_je8ls"]
+[ext_resource type="AudioStream" uid="uid://xn4i1nimorra" path="res://Assets/Audio/SFX/GravityWell.wav" id="30_atcdk"]
+[ext_resource type="AudioStream" uid="uid://dfyokyg52yuab" path="res://Assets/Audio/SFX/Wind.wav" id="32_pbld3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
@@ -484,12 +486,13 @@ texture_filter = 1
 position = Vector2(72, 0)
 texture = ExtResource("9_cg75h")
 
-[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera", "audio")]
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera", "breakSFX", "gravityWellSFX")]
 position = Vector2(577, 326)
 script = ExtResource("3_tawnv")
 sprite = NodePath("Sprite2D")
 camera = NodePath("../Camera2D")
-audio = NodePath("AudioStreamPlayer2D")
+breakSFX = NodePath("BreakSFX")
+gravityWellSFX = NodePath("GravityWellSFX")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 z_index = 10
@@ -507,12 +510,17 @@ remote_path = NodePath("../../ArrowHelper")
 update_rotation = false
 update_scale = false
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+[node name="BreakSFX" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("6_w2boq")
 max_polyphony = 10
 bus = &"SFX"
 
-[node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("target")]
+[node name="GravityWellSFX" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("30_atcdk")
+pitch_scale = 0.5
+bus = &"SFX"
+
+[node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("target", "trailSFX")]
 z_index = -50
 z_as_relative = false
 material = SubResource("ShaderMaterial_0qt5o")
@@ -527,6 +535,11 @@ script = ExtResource("15_vromc")
 target = NodePath("../Player")
 maxPositions = 20
 minDistance = 2.0
+trailSFX = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Line2D"]
+stream = ExtResource("32_pbld3")
+bus = &"SFX"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 326)
@@ -557,8 +570,8 @@ musicGroup = "game"
 [connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="SceneBaseResources/SceneTransition" method="Quit"]
 [connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="Pause Menu/PauseMenu" method="HideMenu"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
-[connection signal="OnLevelUp" from="Player" to="HUD/Panel/Zoom/Zoom2" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess" method="OnLevelUp"]
+[connection signal="OnLevelUp" from="Player" to="HUD/Panel/Zoom/Zoom2" method="OnLevelUp"]
 [connection signal="OnMassChange" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnMassChange"]
 [connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]
 

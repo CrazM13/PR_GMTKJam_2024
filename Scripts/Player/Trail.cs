@@ -10,6 +10,8 @@ public partial class Trail : Line2D {
 	[Export] private int minPositions = 10;
 	[Export] private float minDistance = 10;
 
+	[Export] private AudioStreamPlayer trailSFX;
+
 	private List<Vector2> pastPositions;
 
 	public override void _Ready() {
@@ -36,6 +38,11 @@ public partial class Trail : Line2D {
 		}
 
 		Visible = target.Visible && pastPositions.Count > minPositions;
+		if (Visible) {
+			trailSFX.Play();
+		} else {
+			trailSFX.Stop();
+		}
 		this.Width = 32 * target.Scale.X;
 
 		this.Points = pastPositions.ToArray();

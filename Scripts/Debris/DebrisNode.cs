@@ -6,6 +6,7 @@ public partial class DebrisNode : Node2D {
 	public uint DebrisID { get; set; }
 
 	[Export] private Sprite2D sprite;
+	[Export] private AudioStreamPlayer2D sfx;
 	[Export] private float speed;
 
 	public Vector2 Velocity { get; set; }
@@ -32,6 +33,10 @@ public partial class DebrisNode : Node2D {
 		base._Ready();
 
 		shakeConfig = new ShakeConfig();
+
+		shakeConfig.OnReset += () => {
+			sfx.Stop();
+		};
 
 		Scale = new Vector2(0, 0);
 		float heading = (float) GD.RandRange(-Mathf.Pi, Mathf.Pi);
@@ -64,6 +69,7 @@ public partial class DebrisNode : Node2D {
 
 	public void Shake(float strength, float intensity = 1) {
 		shakeConfig.Shake(strength, intensity);
+		if (!sfx.Playing) sfx.Play();
 	}
 
 	public void SetDebrisType(DebrisData data) {

@@ -5,7 +5,8 @@ public partial class PlayerMovement : Node2D {
 	[Export] private float Speed = 300.0f;
 	[Export] private Sprite2D sprite;
 	[Export] private ScaleCamera camera;
-	[Export] private AudioStreamPlayer2D audio;
+	[Export, ExportCategory("Audio")] private AudioStreamPlayer2D breakSFX;
+	[Export] private AudioStreamPlayer2D gravityWellSFX;
 
 	public float Range { get; set; } = 16;
 	public float TargetScale {
@@ -175,7 +176,7 @@ public partial class PlayerMovement : Node2D {
 	}
 
 	public void PlayBreakingSFX() {
-		audio.Play();
+		breakSFX.Play();
 	}
 
 	private void LevelUp() {
@@ -261,5 +262,9 @@ public partial class PlayerMovement : Node2D {
 				Win();
 			}
 		}
+	}
+
+	public void PlayGravitySFX() {
+		if (!gravityWellSFX.Playing) gravityWellSFX.Play();
 	}
 }

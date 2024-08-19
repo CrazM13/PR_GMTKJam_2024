@@ -200,6 +200,7 @@ public class DebrisManager {
 						if (GD.Randf() > 1 - chance) {
 							CustomParticles.Instance.SpawnParticles(consumer.GlobalPosition, 1, 10, 1, consumer.CurrentForm.ParticleColours, debris.Value);
 							consumer.ShakeCamera(5f, 100f);
+							consumer.PlayGravitySFX();
 
 							DebrisData currentFormData = consumer.CurrentForm;
 							if (GameManager.CurrentMass > currentFormData.Mass) {
