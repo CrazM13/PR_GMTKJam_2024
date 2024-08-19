@@ -26,17 +26,12 @@ public partial class DebrisNode : Node2D {
 
 	private int emmisionFrames = 0;
 
-	#region Shake
-	private float decay = 0.9f;
-	private float intensity = 0.9f;
-
-	private float shakeStrength;
-	private float shakeTime = 0;
-	private float intensityMod = 1;
-	#endregion
+	private ShakeConfig shakeConfig;
 
 	public override void _Ready() {
 		base._Ready();
+
+		shakeConfig = new ShakeConfig();
 
 		Scale = new Vector2(0, 0);
 		float heading = (float) GD.RandRange(-Mathf.Pi, Mathf.Pi);
@@ -64,29 +59,11 @@ public partial class DebrisNode : Node2D {
 			emmisionFrames = 0;
 		}
 
-		UpdateShake((float) delta);
-	}
-
-	private void UpdateShake(float delta) {
-		if (shakeStrength > 0.25f) {
-			shakeTime += delta * intensity * intensityMod;
-
-			float x = Mathf.Sin(shakeTime * 0.7f) * shakeStrength;
-			float y = Mathf.Cos(shakeTime * 0.3f) * shakeStrength;
-
-			sprite.Position = new Vector2(x, y);
-
-			shakeStrength *= decay;
-
-			if (shakeStrength <= 0.25f) {
-				shakeTime = 0;
-			}
-		}
+		sprite.Position = shakeConfig.UpdateShake((float) delta);
 	}
 
 	public void Shake(float strength, float intensity = 1) {
-		shakeStrength = Mathf.Max(shakeStrength, strength);
-		intensityMod = intensity;
+		shakeConfig.Shake(strength, intensity);
 	}
 
 	public void SetDebrisType(DebrisData data) {

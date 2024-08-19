@@ -27,6 +27,7 @@ public partial class SceneTransition : AnimationPlayer {
 	private void OnAnimationFinish(StringName _) {
 		if (!string.IsNullOrEmpty(pathToLoad)) {
 			lastScene = GetTree().CurrentScene.SceneFilePath;
+			GameManager.IsGamePaused = false;
 			GetTree().ChangeSceneToFile(pathToLoad);
 			pathToLoad = "";
 		}

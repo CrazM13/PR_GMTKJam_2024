@@ -14,10 +14,17 @@ public static class GameManager {
 
 	public static int ParticlesAmount = 1;
 	public static int DisplayHitboxSetting = 0;
+	public static int ShakeReduction = 0;
+	
+	public static bool AllowCheats = false;
 	public static bool ShowHelpArrow = true;
 
 	public static float DefaultReachDistance = 20;
 
 	public static bool IsGamePaused = false;
+
+	public static int DifficultySetting = 1;
+	public static float ConsumptionEfficiency = 0.25f;
+	public static float MassLossModifier = 0.01f;
 
 }

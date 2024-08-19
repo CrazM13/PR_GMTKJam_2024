@@ -3,7 +3,6 @@ using System;
 
 public partial class PlayerMovement : Node2D {
 	[Export] private float Speed = 300.0f;
-	[Export] private float consumptionEffeciency;
 	[Export] private Sprite2D sprite;
 	[Export] private ScaleCamera camera;
 	[Export] private AudioStreamPlayer2D audio;
@@ -122,19 +121,21 @@ public partial class PlayerMovement : Node2D {
 			emmisionFrames = 0;
 		}
 
-		bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Equal);
-		if (isCheatKeyNowPressed && !isCheatkeyPressed) {
-			GameManager.CurrentMass += CurrentForm.Mass * consumptionEffeciency;
-			EmitSignal(SignalName.OnMassChange);
+		if (GameManager.AllowCheats) {
+			bool isCheatKeyNowPressed = Input.IsKeyPressed(Key.Equal);
+			if (isCheatKeyNowPressed && !isCheatkeyPressed) {
+				GameManager.CurrentMass += CurrentForm.Mass * GameManager.ConsumptionEfficiency;
+				EmitSignal(SignalName.OnMassChange);
 
-			DebrisData nextForm = NextForm;
-			if (nextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
-				LevelUp();
-			} else {
-				TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+				DebrisData nextForm = NextForm;
+				if (nextForm != null && GameManager.CurrentMass >= NextForm.Mass) {
+					LevelUp();
+				} else {
+					TargetScale = GameManager.CurrentMass / GameManager.GameScale;
+				}
 			}
+			isCheatkeyPressed = isCheatKeyNowPressed;
 		}
-		isCheatkeyPressed = isCheatKeyNowPressed;
 	}
 	private bool isCheatkeyPressed = false;
 
@@ -144,7 +145,7 @@ public partial class PlayerMovement : Node2D {
 
 			if (!GameManager.IsGamePaused) {
 				if (Input.IsActionPressed("time_sprint")) {
-					Engine.TimeScale = 1.5f;
+					Engine.TimeScale = 2f;
 				} else if (Input.IsActionPressed("time_crawl")) {
 					Engine.TimeScale = 0.5f;
 				} else {
@@ -215,7 +216,7 @@ public partial class PlayerMovement : Node2D {
 			TargetScale = GameManager.CurrentMass / GameManager.GameScale;
 		}
 
-		float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range * TargetScale) * consumptionEffeciency;
+		float consumedMass = DebrisManager.Instance.AttemptConsume(this, Range * TargetScale) * GameManager.ConsumptionEfficiency;
 		if (consumedMass > 0) {
 			ShakeCamera(100, 100);
 			GameManager.CurrentMass += consumedMass;

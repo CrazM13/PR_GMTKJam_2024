@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://uhfaocn1pxkb"]
+[gd_scene load_steps=17 format=3 uid="uid://uhfaocn1pxkb"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_8s7y2"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="2_ylo7d"]
@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="5_31vkf"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/ParticleCountOption.cs" id="5_g84cr"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/HitboxDisplayOption.cs" id="6_fwn03"]
+[ext_resource type="Script" path="res://Scripts/UI/Options/ShakeOption.cs" id="6_qw7qm"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/HelpArrowOption.cs" id="7_tkaa3"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_wrpeo"]
+[ext_resource type="Script" path="res://Scripts/UI/Options/CheatOption.cs" id="8_8ywnu"]
+[ext_resource type="Script" path="res://Scripts/UI/Options/DifficultyOption.cs" id="9_i012u"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="11_uuvv6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d57ki"]
@@ -56,8 +59,10 @@ label_settings = SubResource("LabelSettings_d57ki")
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 size_flags_vertical = 3
+current_tab = 2
 
 [node name="Volume" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -161,10 +166,33 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video/HBoxContainer2"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-text = "Show Hitbox"
+text = "Shake"
 label_settings = SubResource("LabelSettings_6e5li")
 
 [node name="OptionButton" type="OptionButton" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 0
+popup/item_0/text = "Maximum"
+popup/item_0/id = 0
+popup/item_1/text = "Reduced"
+popup/item_1/id = 1
+popup/item_2/text = "None"
+popup/item_2/id = 2
+script = ExtResource("6_qw7qm")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video/HBoxContainer4"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Show Hitbox"
+label_settings = SubResource("LabelSettings_6e5li")
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 item_count = 3
@@ -177,17 +205,69 @@ popup/item_2/text = "Interact Range"
 popup/item_2/id = 2
 script = ExtResource("6_fwn03")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video"]
+[node name="Gameplay" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video/HBoxContainer3"]
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay"]
+layout_mode = 2
+text = "Gameplay"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Cheats"
+label_settings = SubResource("LabelSettings_6e5li")
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 2
+selected = 0
+popup/item_0/text = "Disallowed"
+popup/item_0/id = 0
+popup/item_1/text = "Allowed"
+popup/item_1/id = 1
+script = ExtResource("8_8ywnu")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay/HBoxContainer2"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Difficulty"
+label_settings = SubResource("LabelSettings_6e5li")
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 1
+popup/item_0/text = "Easy"
+popup/item_0/id = 0
+popup/item_1/text = "Normal"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+script = ExtResource("9_i012u")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay/HBoxContainer3"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 text = "Help Arrow"
 label_settings = SubResource("LabelSettings_6e5li")
 
-[node name="OptionButton" type="OptionButton" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Video/HBoxContainer3"]
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/CenterContainer/VBoxContainer/OptionsTab/Gameplay/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 item_count = 2

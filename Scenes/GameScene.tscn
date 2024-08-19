@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=25 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -12,18 +12,31 @@
 [ext_resource type="Script" path="res://Scripts/UI/UIZoomLevel.cs" id="6_f6sk2"]
 [ext_resource type="AudioStream" uid="uid://bdhbe62fdhtyo" path="res://Assets/Audio/SFX/Breaking.wav" id="6_w2boq"]
 [ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="7_eu5w8"]
-[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_fxyhk"]
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenu.cs" id="7_u2513"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="8_76oqu"]
 [ext_resource type="Texture2D" uid="uid://crx6rkhryqenx" path="res://Assets/Textures/Sprites/Arrow.png" id="9_cg75h"]
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
+[ext_resource type="Script" path="res://Scripts/Player/Trail.cs" id="15_vromc"]
+[ext_resource type="AudioStream" uid="uid://bmfjsi6clx6x1" path="res://Assets/Audio/Music/Distorted.wav" id="17_5v7c8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
 
 [sub_resource type="LabelSettings" id="LabelSettings_al10n"]
 font_size = 24
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oai60"]
+blend_mode = 4
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_x2ubv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747368, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_7yw8k"]
+offsets = PackedFloat32Array(0, 0.14, 0.25, 0.38, 0.5, 0.62, 0.75, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1)
 
 [node name="GameScene" type="Node2D"]
 
@@ -199,17 +212,10 @@ icon = ExtResource("8_76oqu")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(577, 326)
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-editor_draw_drag_margin = true
-script = ExtResource("2_8oanl")
-
-[node name="ArrowHelper" type="Node2D" parent="."]
+[node name="ArrowHelper" type="Node2D" parent="." node_paths=PackedStringArray("arrowSprite")]
 position = Vector2(577, 326)
 script = ExtResource("11_ldd6m")
+arrowSprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="ArrowHelper"]
 texture_filter = 1
@@ -219,7 +225,6 @@ texture = ExtResource("9_cg75h")
 [node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "camera", "audio")]
 position = Vector2(577, 326)
 script = ExtResource("3_tawnv")
-consumptionEffeciency = 0.25
 sprite = NodePath("Sprite2D")
 camera = NodePath("../Camera2D")
 audio = NodePath("AudioStreamPlayer2D")
@@ -245,6 +250,29 @@ stream = ExtResource("6_w2boq")
 max_polyphony = 10
 bus = &"SFX"
 
+[node name="Line2D" type="Line2D" parent="." node_paths=PackedStringArray("target")]
+z_index = -50
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_oai60")
+width = 128.0
+width_curve = SubResource("Curve_x2ubv")
+default_color = Color(1, 1, 0.898039, 1)
+gradient = SubResource("Gradient_7yw8k")
+joint_mode = 2
+end_cap_mode = 2
+script = ExtResource("15_vromc")
+target = NodePath("../Player")
+maxPositions = 20
+minDistance = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 326)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+script = ExtResource("2_8oanl")
+
 [node name="DebrisTimer" type="Timer" parent="." node_paths=PackedStringArray("camera")]
 wait_time = 0.25
 autostart = true
@@ -253,7 +281,7 @@ gridScale = 4.0
 camera = NodePath("../Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_fxyhk")
+stream = ExtResource("17_5v7c8")
 autoplay = true
 bus = &"Music"
 script = ExtResource("15_8bfrw")

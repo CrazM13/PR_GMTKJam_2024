@@ -25,7 +25,7 @@ scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_repeat = 3
-motion_mirroring = Vector2(4000, 4000)
+motion_mirroring = Vector2(8000, 8000)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 z_index = -100
@@ -36,4 +36,4 @@ position = Vector2(577, 326)
 scale = Vector2(2, 2)
 texture = ExtResource("5_jkjje")
 region_enabled = true
-region_rect = Rect2(0, 0, 2000, 2000)
+region_rect = Rect2(0, 0, 4000, 4000)
