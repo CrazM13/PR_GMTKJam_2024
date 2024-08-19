@@ -35,8 +35,8 @@ font_size = 24
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qt5o"]
 shader = ExtResource("15_3bthc")
 shader_parameter/Noise = 0.003
-shader_parameter/TextureScale = 4.0
-shader_parameter/ScrollTime = 1.0
+shader_parameter/TextureScale = 2.0
+shader_parameter/ScrollTime = 0.25
 
 [sub_resource type="Curve" id="Curve_x2ubv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747368, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
