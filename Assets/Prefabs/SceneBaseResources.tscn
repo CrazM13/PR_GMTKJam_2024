@@ -27,7 +27,7 @@ scroll_ignore_camera_zoom = true
 script = ExtResource("7_yi22h")
 defaultBG = 2
 backgrounds = [NodePath("ParrallaxLayer3"), NodePath("ParrallaxLayer4")]
-backgroundIndex = PackedInt32Array(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+backgroundIndex = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1)
 
 [node name="BACKUP" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_repeat = 3
