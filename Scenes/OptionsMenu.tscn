@@ -301,7 +301,7 @@ custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Back"
+text = "Main Menu"
 icon = ExtResource("5_31vkf")
 icon_alignment = 1
 expand_icon = true
@@ -315,6 +315,6 @@ script = ExtResource("11_uuvv6")
 musicGroup = "menu"
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Play" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/GameScene.tscn"]]
-[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="GoToLastScene"]
+[connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/Options/Back" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/MainMenu.tscn"]]
 
 [editable path="SceneBaseResources"]
