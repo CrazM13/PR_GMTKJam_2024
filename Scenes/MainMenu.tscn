@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://1tt6ywmkt6xs"]
+[gd_scene load_steps=16 format=3 uid="uid://1tt6ywmkt6xs"]
 
 [ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="1_ihgnj"]
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_j7lwx"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://blederf82rpji" path="res://Assets/Textures/UI/logo.png" id="4_5u2p1"]
 [ext_resource type="Script" path="res://Scripts/UI/TitleEffects.cs" id="4_478el"]
 [ext_resource type="Texture2D" uid="uid://bhhciivmt2kvc" path="res://Assets/Textures/Sprites/Moon_A.png" id="4_pymae"]
+[ext_resource type="Texture2D" uid="uid://by1y1alo4f2p7" path="res://Assets/Textures/Sprites/Ability/GravityEffect.png" id="4_t8w1b"]
+[ext_resource type="Script" path="res://Scripts/UI/ControlRotation.cs" id="5_iechl"]
 [ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="5_wn4wx"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="7_7ere3"]
@@ -35,6 +37,19 @@ speed = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.25098)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer2"]
+layout_mode = 2
+texture = ExtResource("4_t8w1b")
+script = ExtResource("5_iechl")
+
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +64,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Game Name"
+text = "Singularity"
 label_settings = SubResource("LabelSettings_dgmmd")
 script = ExtResource("4_478el")
 rotationSpeed = 0.25

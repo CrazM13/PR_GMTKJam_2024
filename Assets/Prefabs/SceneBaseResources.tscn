@@ -37,3 +37,20 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_jkjje")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(1, 1, 1, 0.25098)
+texture_repeat = 3
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(8000, 8000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = -100
+z_as_relative = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i36xv")
+position = Vector2(577, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("5_jkjje")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
