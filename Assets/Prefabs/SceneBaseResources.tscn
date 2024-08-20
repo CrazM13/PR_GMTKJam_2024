@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://br8tfu03tlr64"]
+[gd_scene load_steps=10 format=3 uid="uid://br8tfu03tlr64"]
 
 [ext_resource type="PackedScene" uid="uid://blgwkg7qnis78" path="res://Assets/Prefabs/SceneTransition.tscn" id="1_ku0yn"]
 [ext_resource type="Script" path="res://Scripts/Particles/CustomParticles.cs" id="2_dvo4c"]
@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://buoun6nt5xs63" path="res://Assets/Textures/Sprites/Galaxy.png" id="5_cnofp"]
 [ext_resource type="Texture2D" uid="uid://dt6y2w30guhcx" path="res://Assets/Textures/Sprites/Starfield.png" id="5_jkjje"]
 [ext_resource type="Script" path="res://Scripts/BackgroundChanger.cs" id="7_yi22h"]
-[ext_resource type="Texture2D" uid="uid://c5sr8phg40i2p" path="res://Assets/Textures/Sprites/Background_Sand.png" id="8_ekuwu"]
-[ext_resource type="Texture2D" uid="uid://7m8qgrdsa5qi" path="res://Assets/Textures/Sprites/Background_Earth.png" id="9_0kmgs"]
+[ext_resource type="Texture2D" uid="uid://uq0y4s48pojy" path="res://Assets/Textures/Sprites/StarfieldNebula.png" id="8_3sm23"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i36xv"]
 shader = ExtResource("3_y22yh")
@@ -27,8 +26,8 @@ script = ExtResource("2_dvo4c")
 scroll_ignore_camera_zoom = true
 script = ExtResource("7_yi22h")
 defaultBG = 2
-backgrounds = [NodePath("ParallaxLayer"), NodePath("ParallaxLayer2"), NodePath("ParrallaxLayer3")]
-backgroundIndex = PackedInt32Array(0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+backgrounds = [NodePath("ParrallaxLayer3"), NodePath("ParrallaxLayer4")]
+backgroundIndex = PackedInt32Array(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
 [node name="BACKUP" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_repeat = 3
@@ -45,34 +44,6 @@ texture = ExtResource("5_jkjje")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-texture_repeat = 3
-motion_mirroring = Vector2(8000, 8000)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-z_index = -100
-z_as_relative = false
-texture_repeat = 2
-position = Vector2(577, 326)
-scale = Vector2(2, 2)
-texture = ExtResource("8_ekuwu")
-region_enabled = true
-region_rect = Rect2(0, 0, 4000, 4000)
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-texture_repeat = 3
-motion_mirroring = Vector2(8000, 8000)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-z_index = -100
-z_as_relative = false
-texture_repeat = 2
-position = Vector2(577, 326)
-scale = Vector2(2, 2)
-texture = ExtResource("9_0kmgs")
-region_enabled = true
-region_rect = Rect2(0, 0, 4000, 4000)
-
 [node name="ParrallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 texture_repeat = 3
 motion_mirroring = Vector2(8000, 8000)
@@ -85,5 +56,20 @@ material = SubResource("ShaderMaterial_i36xv")
 position = Vector2(577, 326)
 scale = Vector2(2, 2)
 texture = ExtResource("5_jkjje")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="ParrallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_repeat = 3
+motion_mirroring = Vector2(8000, 8000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParrallaxLayer4"]
+z_index = -100
+z_as_relative = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i36xv")
+position = Vector2(577, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("8_3sm23")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
