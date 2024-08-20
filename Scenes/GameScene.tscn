@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dctyqa7357qyk"]
+[gd_scene load_steps=67 format=3 uid="uid://dctyqa7357qyk"]
 
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_c1l5s"]
 [ext_resource type="Script" path="res://Scripts/ScaleCamera.cs" id="2_8oanl"]
@@ -26,7 +26,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/ArrowHelper.cs" id="11_ldd6m"]
 [ext_resource type="Texture2D" uid="uid://bvf5pfpsgoaq0" path="res://Assets/Textures/Sprites/meteorite_c.png" id="12_rc5fo"]
 [ext_resource type="Shader" uid="uid://c5prg8upj7oxh" path="res://Assets/Shaders/Rainbow.tres" id="15_3bthc"]
-[ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="15_8bfrw"]
 [ext_resource type="Script" path="res://Scripts/Player/Trail.cs" id="15_vromc"]
 [ext_resource type="Texture2D" uid="uid://dbqvxdgudtvss" path="res://Assets/Textures/Sprites/Gas_Giant_B.png" id="16_sdty4"]
 [ext_resource type="AudioStream" uid="uid://bmfjsi6clx6x1" path="res://Assets/Audio/Music/Distorted.wav" id="17_5v7c8"]
@@ -41,6 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://by1y1alo4f2p7" path="res://Assets/Textures/Sprites/Ability/GravityEffect.png" id="30_t7nex"]
 [ext_resource type="Script" path="res://Scripts/Player/AbilityGravityWell.cs" id="30_yy3yd"]
 [ext_resource type="AudioStream" uid="uid://dfyokyg52yuab" path="res://Assets/Audio/SFX/Wind.wav" id="32_pbld3"]
+[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="40_5jisf"]
+[ext_resource type="Script" path="res://Scripts/Audio/GameAudioChange.cs" id="41_fqfm4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mi75w"]
 font_size = 27
@@ -142,6 +143,9 @@ colors = PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 
 [node name="GameScene" type="Node2D"]
 
 [node name="SceneBaseResources" parent="." instance=ExtResource("1_c1l5s")]
+
+[node name="ParallaxBackground" parent="SceneBaseResources" index="2"]
+defaultBG = 0
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -613,10 +617,11 @@ gridScale = 4.0
 camera = NodePath("../Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_5v7c8")
+stream = ExtResource("40_5jisf")
 autoplay = true
 bus = &"Music"
-script = ExtResource("15_8bfrw")
+script = ExtResource("41_fqfm4")
+advancedMusic = ExtResource("17_5v7c8")
 musicGroup = "game"
 
 [connection signal="OnMenuStateChanged" from="Pause Menu/PauseMenu" to="Player" method="ReactToPauseMenu"]
@@ -625,9 +630,11 @@ musicGroup = "game"
 [connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Options" to="SceneBaseResources/SceneTransition" method="LoadScene" binds= ["res://Scenes/OptionsMenu.tscn"]]
 [connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="SceneBaseResources/SceneTransition" method="Quit"]
 [connection signal="pressed" from="Pause Menu/PauseMenu/VBoxContainer/HBoxContainer/Quit" to="Pause Menu/PauseMenu" method="HideMenu"]
+[connection signal="OnLevelUp" from="Player" to="SceneBaseResources/ParallaxBackground" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar/StagesProcess" method="OnLevelUp"]
 [connection signal="OnLevelUp" from="Player" to="HUD/Panel/Zoom/Zoom2" method="OnLevelUp"]
+[connection signal="OnLevelUp" from="Player" to="AudioStreamPlayer" method="OnLevelUp"]
 [connection signal="OnMassChange" from="Player" to="HUD/Panel/CenterContainer/HBoxContainer/ProgressBar" method="OnMassChange"]
 [connection signal="timeout" from="DebrisTimer" to="DebrisTimer" method="UpdateDebris"]
 

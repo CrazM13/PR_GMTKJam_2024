@@ -12,9 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://biitdr1nvnhwb" path="res://Assets/Textures/Sprites/Black_Hole_A.png" id="6_i5sqb"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="7_7ere3"]
-[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="8_3diu3"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="9_5d54k"]
 [ext_resource type="Script" path="res://Scripts/UI/ButtonEffects.cs" id="9_osu5o"]
+[ext_resource type="AudioStream" uid="uid://dpqo57jcxgd0q" path="res://Assets/Audio/Music/Chorus.wav" id="14_iuepm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dgmmd"]
 font_size = 148
@@ -233,7 +233,7 @@ expand_icon = true
 script = ExtResource("9_osu5o")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_3diu3")
+stream = ExtResource("14_iuepm")
 autoplay = true
 bus = &"Music"
 script = ExtResource("9_5d54k")

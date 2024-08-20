@@ -10,11 +10,11 @@
 [ext_resource type="Script" path="res://Scripts/UI/Options/HitboxDisplayOption.cs" id="6_fwn03"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/ShakeOption.cs" id="6_qw7qm"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/HelpArrowOption.cs" id="7_tkaa3"]
-[ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="7_wrpeo"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/CheatOption.cs" id="8_8ywnu"]
 [ext_resource type="Script" path="res://Scripts/UI/Options/DifficultyOption.cs" id="9_i012u"]
 [ext_resource type="Script" path="res://Scripts/Audio/PersistantMusic.cs" id="11_uuvv6"]
 [ext_resource type="Script" path="res://Scripts/UI/ButtonEffects.cs" id="12_ocgeh"]
+[ext_resource type="AudioStream" uid="uid://dpqo57jcxgd0q" path="res://Assets/Audio/Music/Chorus.wav" id="14_e81bv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d57ki"]
 font_size = 148
@@ -308,7 +308,7 @@ expand_icon = true
 script = ExtResource("12_ocgeh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_wrpeo")
+stream = ExtResource("14_e81bv")
 autoplay = true
 bus = &"Music"
 script = ExtResource("11_uuvv6")
