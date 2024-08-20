@@ -242,6 +242,8 @@ public partial class PlayerMovement : Node2D {
 			GameManager.IsGamePaused = true;
 			Engine.TimeScale = 1;
 
+			GameManager.Level++;
+
 			GetTree().Root.GetChild(0).GetNode<SceneTransition>("SceneBaseResources/SceneTransition").ReloadScene(3f);
 		}
 	}

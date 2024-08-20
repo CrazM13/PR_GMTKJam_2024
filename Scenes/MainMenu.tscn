@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://1tt6ywmkt6xs"]
+[gd_scene load_steps=17 format=3 uid="uid://1tt6ywmkt6xs"]
 
 [ext_resource type="Theme" uid="uid://c4rluknvcil5d" path="res://Assets/Themes/MainTheme.tres" id="1_ihgnj"]
 [ext_resource type="PackedScene" uid="uid://br8tfu03tlr64" path="res://Assets/Prefabs/SceneBaseResources.tscn" id="1_j7lwx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://by1y1alo4f2p7" path="res://Assets/Textures/Sprites/Ability/GravityEffect.png" id="4_t8w1b"]
 [ext_resource type="Script" path="res://Scripts/UI/ControlRotation.cs" id="5_iechl"]
 [ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="5_wn4wx"]
+[ext_resource type="Texture2D" uid="uid://db5sbntipf1vw" path="res://Assets/Textures/Sprites/Black_Hole_B.png" id="6_ehl1p"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="7_7ere3"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="8_3diu3"]
@@ -38,7 +39,6 @@ speed = 10.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0.25098)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -46,9 +46,25 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer2"]
+self_modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 2
 texture = ExtResource("4_t8w1b")
 script = ExtResource("5_iechl")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer2/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ehl1p")
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
 anchors_preset = 15
