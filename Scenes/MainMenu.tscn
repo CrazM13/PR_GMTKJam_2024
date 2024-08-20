@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://by1y1alo4f2p7" path="res://Assets/Textures/Sprites/Ability/GravityEffect.png" id="4_t8w1b"]
 [ext_resource type="Script" path="res://Scripts/UI/ControlRotation.cs" id="5_iechl"]
 [ext_resource type="Texture2D" uid="uid://dtd0oeiygnrov" path="res://Assets/Textures/Sprites/Gas_Giant_A.png" id="5_wn4wx"]
-[ext_resource type="Texture2D" uid="uid://db5sbntipf1vw" path="res://Assets/Textures/Sprites/Black_Hole_B.png" id="6_ehl1p"]
+[ext_resource type="Texture2D" uid="uid://biitdr1nvnhwb" path="res://Assets/Textures/Sprites/Black_Hole_A.png" id="6_i5sqb"]
 [ext_resource type="Texture2D" uid="uid://gviqqwep5qml" path="res://Assets/Textures/Sprites/Planet_A.png" id="6_ps1w5"]
 [ext_resource type="Script" path="res://Scripts/UI/MenuCamera.cs" id="7_7ere3"]
 [ext_resource type="AudioStream" uid="uid://bv1etl1wmesvq" path="res://Assets/Audio/Music/SpaceCowboy.wav" id="8_3diu3"]
@@ -64,7 +64,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_ehl1p")
+texture = ExtResource("6_i5sqb")
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -152,6 +152,62 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="HSeparator4" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator5" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator6" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator7" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator8" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator9" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator10" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator11" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator12" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator13" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator14" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator15" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator16" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator17" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator18" type="HSeparator" parent="CanvasLayer/CenterContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
